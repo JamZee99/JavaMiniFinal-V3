@@ -153,7 +153,7 @@ public class Admin extends JFrame {
         this.setContentPane(tecMainPane);
         this.pack();
         setVisible(true);
-        conn = LMSdb_siyam.java_db();
+        conn = LMSdb.java_db();
 
         Notice();
 
