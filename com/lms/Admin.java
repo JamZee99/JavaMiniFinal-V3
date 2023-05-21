@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class AdminNew extends JFrame {
+public class Admin extends JFrame {
 
     Connection conn = null;
     ResultSet rs = null;
@@ -144,7 +144,7 @@ public class AdminNew extends JFrame {
     public String StdID;
 
     public String Status;
-    public AdminNew(String title) {
+    public Admin(String title) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(tecMainPane);
@@ -470,7 +470,7 @@ public class AdminNew extends JFrame {
     }
 
     public static void main(String[] args) {
-        AdminNew an =new AdminNew("siyam");
+        Admin an =new Admin("siyam");
 
     }
 }
