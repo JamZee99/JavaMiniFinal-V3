@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.lms.Admin">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.lms.AdminNew">
   <grid id="27dc6" binding="tecMainPane" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -208,7 +208,7 @@
                   <text value="Last Name"/>
                 </properties>
               </component>
-              <component id="85e0e" class="javax.swing.JTextField" binding="setText">
+              <component id="85e0e" class="javax.swing.JTextField" binding="txtlnameA">
                 <constraints>
                   <grid row="6" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <minimum-size width="450" height="35"/>
@@ -560,7 +560,7 @@
                   <font name="Segoe Print"/>
                 </properties>
               </component>
-              <component id="f1e15" class="javax.swing.JTextField" binding="txtNoticeTitle">
+              <component id="f1e15" class="javax.swing.JTextField" binding="txtnoticedetrails">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -872,7 +872,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="e95e6" class="javax.swing.JTable" binding="table8">
+                  <component id="e95e6" class="javax.swing.JTable" binding="table8" default-binding="true">
                     <constraints/>
                     <properties/>
                   </component>
@@ -933,7 +933,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="27286" class="javax.swing.JTable" binding="tbl_Notice">
+                  <component id="27286" class="javax.swing.JTable" binding="table7" default-binding="true">
                     <constraints/>
                     <properties/>
                   </component>
@@ -960,7 +960,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <grid id="6de81" layout-manager="GridLayoutManager" row-count="13" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="6de81" layout-manager="GridLayoutManager" row-count="11" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <tabbedpane title="Student"/>
@@ -978,7 +978,7 @@
                       </component>
                       <vspacer id="f7eac">
                         <constraints>
-                          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </vspacer>
                       <component id="659dc" class="javax.swing.JLabel">
@@ -1037,7 +1037,7 @@
                           <text value="Password"/>
                         </properties>
                       </component>
-                      <component id="9b177" class="javax.swing.JTextField" binding="txtlnStd">
+                      <component id="9b177" class="javax.swing.JTextField" binding="txtlname">
                         <constraints>
                           <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1045,7 +1045,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="5d94" class="javax.swing.JTextField" binding="txtdobstd">
+                      <component id="5d94" class="javax.swing.JTextField" binding="txtdob">
                         <constraints>
                           <grid row="3" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1053,7 +1053,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="1662c" class="javax.swing.JTextField" binding="txtphnstd">
+                      <component id="1662c" class="javax.swing.JTextField" binding="txtphn">
                         <constraints>
                           <grid row="4" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1061,7 +1061,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="8a415" class="javax.swing.JTextField" binding="txtemailstd">
+                      <component id="8a415" class="javax.swing.JTextField" binding="txtemail">
                         <constraints>
                           <grid row="5" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1069,7 +1069,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="a6e10" class="javax.swing.JComboBox" binding="txtgenderstd">
+                      <component id="a6e10" class="javax.swing.JComboBox" binding="txtgender">
                         <constraints>
                           <grid row="6" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -1082,15 +1082,12 @@
                       </component>
                       <vspacer id="4c876">
                         <constraints>
-                          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </vspacer>
                       <scrollpane id="d070">
                         <constraints>
-                          <grid row="12" column="1" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                            <minimum-size width="250" height="-1"/>
-                            <preferred-size width="250" height="-1"/>
-                          </grid>
+                          <grid row="10" column="1" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties/>
                         <border type="none"/>
@@ -1101,7 +1098,7 @@
                           </component>
                         </children>
                       </scrollpane>
-                      <component id="22c99" class="javax.swing.JPasswordField" binding="txtpwStd">
+                      <component id="22c99" class="javax.swing.JPasswordField" binding="txtpw">
                         <constraints>
                           <grid row="7" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1109,7 +1106,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="b5e13" class="javax.swing.JTextField" binding="txtStdid">
+                      <component id="b5e13" class="javax.swing.JTextField" binding="txtstdid">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1120,7 +1117,7 @@
                           <text value=""/>
                         </properties>
                       </component>
-                      <component id="e2a6b" class="javax.swing.JTextField" binding="txtfnStd">
+                      <component id="e2a6b" class="javax.swing.JTextField" binding="txtfname">
                         <constraints>
                           <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -1130,9 +1127,9 @@
                           <font name="Segoe Print"/>
                         </properties>
                       </component>
-                      <component id="eb267" class="javax.swing.JButton" binding="btnRegStd">
+                      <component id="eb267" class="javax.swing.JButton" binding="btnregister">
                         <constraints>
-                          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <background color="-13704704"/>
@@ -1141,9 +1138,9 @@
                           <text value="Register"/>
                         </properties>
                       </component>
-                      <component id="e4359" class="javax.swing.JButton" binding="btnupdateStd">
+                      <component id="e4359" class="javax.swing.JButton" binding="btnupdate">
                         <constraints>
-                          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <background color="-10065299"/>
@@ -1154,7 +1151,7 @@
                       </component>
                       <component id="fbf06" class="javax.swing.JButton" binding="btndelete">
                         <constraints>
-                          <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <background color="-912896"/>
@@ -1163,7 +1160,7 @@
                           <text value="Delete"/>
                         </properties>
                       </component>
-                      <component id="8c3b5" class="javax.swing.JButton" binding="btngetdetailsStd">
+                      <component id="8c3b5" class="javax.swing.JButton" binding="btngetdetails">
                         <constraints>
                           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -1173,38 +1170,6 @@
                           <foreground color="-1"/>
                           <text value="Get Details"/>
                         </properties>
-                      </component>
-                      <component id="639d8" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Address"/>
-                        </properties>
-                      </component>
-                      <component id="893ef" class="javax.swing.JTextField" binding="txtAddstd">
-                        <constraints>
-                          <grid row="8" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="-1"/>
-                          </grid>
-                        </constraints>
-                        <properties/>
-                      </component>
-                      <component id="c4ff8" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Department"/>
-                        </properties>
-                      </component>
-                      <component id="c68c1" class="javax.swing.JTextField" binding="txtDepstd">
-                        <constraints>
-                          <grid row="9" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="-1"/>
-                          </grid>
-                        </constraints>
-                        <properties/>
                       </component>
                     </children>
                   </grid>
@@ -1277,7 +1242,7 @@
                           <text value="E-Mail"/>
                         </properties>
                       </component>
-                      <component id="87b7b" class="javax.swing.JLabel">
+                      <component id="87b7b" class="javax.swing.JLabel" binding="lblgenderL">
                         <constraints>
                           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -1552,6 +1517,14 @@
                           </model>
                         </properties>
                       </component>
+                      <component id="75504" class="javax.swing.JPasswordField" binding="txtpwAdm">
+                        <constraints>
+                          <grid row="7" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
                       <scrollpane id="84fd4">
                         <constraints>
                           <grid row="10" column="1" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -1587,7 +1560,7 @@
                           <text value="Register"/>
                         </properties>
                       </component>
-                      <component id="9f4bd" class="javax.swing.JButton" binding="btnupdateAdm">
+                      <component id="9f4bd" class="javax.swing.JButton">
                         <constraints>
                           <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -1611,7 +1584,7 @@
                           <text value="Delete"/>
                         </properties>
                       </component>
-                      <component id="220d6" class="javax.swing.JButton" binding="btngdetailsAdm">
+                      <component id="220d6" class="javax.swing.JButton">
                         <constraints>
                           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -1631,14 +1604,6 @@
                       <component id="cbd5" class="javax.swing.JTextField" binding="txtadmdob">
                         <constraints>
                           <grid row="3" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="-1"/>
-                          </grid>
-                        </constraints>
-                        <properties/>
-                      </component>
-                      <component id="d516d" class="javax.swing.JPasswordField" binding="txtpwAdm">
-                        <constraints>
-                          <grid row="7" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
                           </grid>
                         </constraints>
