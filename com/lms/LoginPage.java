@@ -64,47 +64,47 @@ public class LoginPage extends JFrame{
                 String sql = "SELECT * FROM admin WHERE Ad_id="+userID;
 
                 String access = (comboPostion.getSelectedItem().toString());
-//                if (access == "Admin") {
-//
-//                    try {
-//                        int count = 0;
-//                        pst = conn.prepareStatement(sql);
-//
-//                        //pst.setString(1,txtUserID.getText());
-//                        // pst.setString(2,txtPwd.getText());
-//                        //pst.setString(1,comboPostion.getSelectedItem().toString());
-//
-//                        rs = pst.executeQuery(sql);
-//                        while (rs.next()) {
-//                            String id = rs.getString("Ad_id");
-//                            String Pass = rs.getString("Password");
-//                            AdminM.Ad_id = id;
-//                            AdminM.Password =Pass;
-//                            count = count + 1;
-//
-//                        }
-//                        //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
-//                        if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
-//                            JOptionPane.showMessageDialog(null, "Welcome "+access);
-//                            Admin admin = new Admin("admin form");
-//                            admin.setVisible(true);
-//                            dispose();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Dear Admin, UserId and Password you entered wrong");
-//                        }
-//
-//
-//                    } catch (Exception e) {
-//                        JOptionPane.showMessageDialog(null, "fill the fields");
-//                    } finally {
-//                        try {
-//                            rs.close();
-//                            pst.close();
-//                        } catch (Exception e) {
-//
-//                        }
-//                    }
-//                }
+                if (access == "Admin") {
+
+                    try {
+                        int count = 0;
+                        pst = conn.prepareStatement(sql);
+
+                        //pst.setString(1,txtUserID.getText());
+                        // pst.setString(2,txtPwd.getText());
+                        //pst.setString(1,comboPostion.getSelectedItem().toString());
+
+                        rs = pst.executeQuery(sql);
+                        while (rs.next()) {
+                            String id = rs.getString("Ad_id");
+                            String Pass = rs.getString("Password");
+                            AdminM.Ad_id = id;
+                            AdminM.Password =Pass;
+                            count = count + 1;
+
+                        }
+                        //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
+                        if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
+                            JOptionPane.showMessageDialog(null, "Welcome "+access);
+                            Admin admin = new Admin("admin form");
+                            admin.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Dear Admin, UserId and Password you entered wrong");
+                        }
+
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "fill the fields");
+                    } finally {
+                        try {
+                            rs.close();
+                            pst.close();
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
                 if (access == "Student") {
                     userID = txtUserID.getText();
                     //String sqlAdmin = "SELECT Std_id,Password FROM student where Std_id ="+userID;
