@@ -153,7 +153,7 @@ public class Admin extends JFrame {
         this.setContentPane(tecMainPane);
         this.pack();
         setVisible(true);
-        conn = LMSdb.java_db();
+        conn = LMSdb_siyam.java_db();
 
         Notice();
 
@@ -305,23 +305,6 @@ public class Admin extends JFrame {
                 Btn_Maintain_notice.setForeground(Color.white);
             }
         });
-
-//        maleRadioButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                gender = "M";
-//                maleRadioButton.setSelected(true);
-//                femaleRadioButton.setSelected(false);
-//            }
-//        });
-//        femaleRadioButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                gender = "F";
-//                femaleRadioButton.setSelected(true);
-//                maleRadioButton.setSelected(false);
-//            }
-//        });
 
         /* -----------------------------STRTNG USER PROFLE------------------------------------- */
 
@@ -3133,6 +3116,6 @@ public class Admin extends JFrame {
     }
     public static void main(String[] args) {
         Admin an =new Admin("siyam");
-
+        LMSdb_siyam db = new LMSdb_siyam();
     }
 }
