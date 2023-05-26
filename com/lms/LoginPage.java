@@ -54,7 +54,7 @@ public class LoginPage extends JFrame{
         });
 
         //initComponents();
-        conn = LMSdb.java_db();
+        conn = LMSdb_siyam.java_db();
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
