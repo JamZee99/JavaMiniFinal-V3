@@ -121,7 +121,7 @@ public class LoginPage extends JFrame{
                         }
                         if (Objects.equals(userID, Student.Std_id) && Objects.equals(pwd, Student.Password)){
                             JOptionPane.showMessageDialog(null, "Welcome "+access);
-                            StudentForm2 studentForm2 = new StudentForm2("Student from");
+                            StudentForm studentForm2 = new StudentForm("Student from");
                             studentForm2.setVisible(true);
                             dispose();
                         } else {

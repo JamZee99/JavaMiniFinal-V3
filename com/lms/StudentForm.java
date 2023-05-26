@@ -15,7 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Objects;
 
-public class StudentForm2 extends JFrame {
+public class StudentForm extends JFrame {
     private JPanel MainPane;
     private JButton contactButton;
     private JButton courseDetailsButton;
@@ -80,7 +80,7 @@ public class StudentForm2 extends JFrame {
 
     int imgT = 0;
 
-    public StudentForm2(String title) {
+    public StudentForm(String title) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(MainPane);
@@ -90,11 +90,7 @@ public class StudentForm2 extends JFrame {
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
-        
-        table_loadMEd();
-        table_loadCourse();
-        table_loadGrades();
-        table_loadNotice();
+
         //LoginPage loginPage = new LoginPage("Login page");
 
 
@@ -109,13 +105,21 @@ public class StudentForm2 extends JFrame {
                 //j3.removeAll();
                 jMain.repaint();
                 jMain.revalidate();
-                courseDetailsButton.setBackground(Color.white);
-                gradesAndGPAButton.setBackground(Color.white);
-                noticesButton.setBackground(Color.white);
-                timetablesButton.setBackground(Color.white);
-                profileButton.setBackground(Color.white);
-                mediButton.setBackground(Color.white);
-                contactButton.setBackground(new Color(250, 247, 147));
+                courseDetailsButton.setBackground(new Color(174, 196, 255));
+                gradesAndGPAButton.setBackground(new Color(174, 196, 255));
+                noticesButton.setBackground(new Color(174, 196, 255));
+                timetablesButton.setBackground(new Color(174, 196, 255));
+                profileButton.setBackground(new Color(174, 196, 255));
+                mediButton.setBackground(new Color(174, 196, 255));
+                contactButton.setBackground(new Color(25, 118, 250));
+
+                courseDetailsButton.setForeground(new Color(0, 0, 0));
+                gradesAndGPAButton.setForeground(new Color(0, 0, 0));
+                noticesButton.setForeground(new Color(0, 0, 0));
+                timetablesButton.setForeground(new Color(0, 0, 0));
+                profileButton.setForeground(new Color(0, 0, 0));
+                mediButton.setForeground(new Color(0, 0, 0));
+                contactButton.setForeground(new Color(255, 255, 255));
             }
         });
         mediButton.addActionListener(new ActionListener() {
@@ -129,13 +133,21 @@ public class StudentForm2 extends JFrame {
                 //j3.removeAll();
                 jMain.repaint();
                 jMain.revalidate();
-                courseDetailsButton.setBackground(Color.white);
-                gradesAndGPAButton.setBackground(Color.white);
-                noticesButton.setBackground(Color.white);
-                timetablesButton.setBackground(Color.white);
-                profileButton.setBackground(Color.white);
-                mediButton.setBackground(new Color(250, 247, 147));
-                contactButton.setBackground(Color.white);
+                courseDetailsButton.setBackground(new Color(174, 196, 255));
+                gradesAndGPAButton.setBackground(new Color(174, 196, 255));
+                noticesButton.setBackground(new Color(174, 196, 255));
+                timetablesButton.setBackground(new Color(174, 196, 255));
+                profileButton.setBackground(new Color(174, 196, 255));
+                mediButton.setBackground(new Color(25, 118, 250));
+                contactButton.setBackground(new Color(174, 196, 255));
+
+                courseDetailsButton.setForeground(new Color(0, 0, 0));
+                gradesAndGPAButton.setForeground(new Color(0, 0, 0));
+                noticesButton.setForeground(new Color(0, 0, 0));
+                timetablesButton.setForeground(new Color(0, 0, 0));
+                profileButton.setForeground(new Color(0, 0, 0));
+                mediButton.setForeground(new Color(255, 255, 255));
+                contactButton.setForeground(new Color(0, 0, 0));
             }
         });
         profileButton.addActionListener(new ActionListener() {
@@ -149,13 +161,21 @@ public class StudentForm2 extends JFrame {
                 //j3.removeAll();
                 jMain.repaint();
                 jMain.revalidate();
-                courseDetailsButton.setBackground(Color.white);
-                gradesAndGPAButton.setBackground(Color.white);
-                noticesButton.setBackground(Color.white);
-                timetablesButton.setBackground(Color.white);
-                profileButton.setBackground(new Color(250, 247, 147));
-                mediButton.setBackground(Color.white);
-                contactButton.setBackground(Color.white);
+                courseDetailsButton.setBackground(new Color(174, 196, 255));
+                gradesAndGPAButton.setBackground(new Color(174, 196, 255));
+                noticesButton.setBackground(new Color(174, 196, 255));
+                timetablesButton.setBackground(new Color(174, 196, 255));
+                profileButton.setBackground(new Color(25, 118, 250));
+                mediButton.setBackground(new Color(174, 196, 255));
+                contactButton.setBackground(new Color(174, 196, 255));
+
+                courseDetailsButton.setForeground(new Color(0, 0, 0));
+                gradesAndGPAButton.setForeground(new Color(0, 0, 0));
+                noticesButton.setForeground(new Color(0, 0, 0));
+                timetablesButton.setForeground(new Color(0, 0, 0));
+                profileButton.setForeground(new Color(255, 255, 255));
+                mediButton.setForeground(new Color(0, 0, 0));
+                contactButton.setForeground(new Color(0, 0, 0));
             }
         });
         timetablesButton.addActionListener(new ActionListener() {
@@ -169,13 +189,21 @@ public class StudentForm2 extends JFrame {
                 //j3.removeAll();
                 jMain.repaint();
                 jMain.revalidate();
-                courseDetailsButton.setBackground(Color.white);
-                gradesAndGPAButton.setBackground(Color.white);
-                noticesButton.setBackground(Color.white);
-                timetablesButton.setBackground(new Color(250, 247, 147));
-                profileButton.setBackground(Color.white);
-                mediButton.setBackground(Color.white);
-                contactButton.setBackground(Color.white);
+                courseDetailsButton.setBackground(new Color(174, 196, 255));
+                gradesAndGPAButton.setBackground(new Color(174, 196, 255));
+                noticesButton.setBackground(new Color(174, 196, 255));
+                timetablesButton.setBackground(new Color(25, 118, 250));
+                profileButton.setBackground(new Color(174, 196, 255));
+                mediButton.setBackground(new Color(174, 196, 255));
+                contactButton.setBackground(new Color(174, 196, 255));
+
+                courseDetailsButton.setForeground(new Color(0, 0, 0));
+                gradesAndGPAButton.setForeground(new Color(0, 0, 0));
+                noticesButton.setForeground(new Color(0, 0, 0));
+                timetablesButton.setForeground(new Color(255, 255, 255));
+                profileButton.setForeground(new Color(0, 0, 0));
+                mediButton.setForeground(new Color(0, 0, 0));
+                contactButton.setForeground(new Color(0, 0, 0));
             }
         });
         noticesButton.addActionListener(new ActionListener() {
@@ -189,13 +217,21 @@ public class StudentForm2 extends JFrame {
                 //j3.removeAll();
                 jMain.repaint();
                 jMain.revalidate();
-                courseDetailsButton.setBackground(Color.white);
-                gradesAndGPAButton.setBackground(Color.white);
-                noticesButton.setBackground(new Color(250, 247, 147));
-                timetablesButton.setBackground(Color.white);
-                profileButton.setBackground(Color.white);
-                mediButton.setBackground(Color.white);
-                contactButton.setBackground(Color.white);
+                courseDetailsButton.setBackground(new Color(174, 196, 255));
+                gradesAndGPAButton.setBackground(new Color(174, 196, 255));
+                noticesButton.setBackground(new Color(25, 118, 250));
+                timetablesButton.setBackground(new Color(174, 196, 255));
+                profileButton.setBackground(new Color(174, 196, 255));
+                mediButton.setBackground(new Color(174, 196, 255));
+                contactButton.setBackground(new Color(174, 196, 255));
+
+                courseDetailsButton.setForeground(new Color(0, 0, 0));
+                gradesAndGPAButton.setForeground(new Color(0, 0, 0));
+                noticesButton.setForeground(new Color(255, 255, 255));
+                timetablesButton.setForeground(new Color(0, 0, 0));
+                profileButton.setForeground(new Color(0, 0, 0));
+                mediButton.setForeground(new Color(0, 0, 0));
+                contactButton.setForeground(new Color(0, 0, 0));
             }
         });
 
@@ -211,13 +247,21 @@ public class StudentForm2 extends JFrame {
                 //j3.removeAll();
                 jMain.repaint();
                 jMain.revalidate();
-                courseDetailsButton.setBackground(Color.white);
-                gradesAndGPAButton.setBackground(new Color(250, 247, 147));
-                noticesButton.setBackground(Color.white);
-                timetablesButton.setBackground(Color.white);
-                profileButton.setBackground(Color.white);
-                mediButton.setBackground(Color.white);
-                contactButton.setBackground(Color.white);
+                courseDetailsButton.setBackground(new Color(174, 196, 255));
+                gradesAndGPAButton.setBackground(new Color(25, 118, 250));
+                noticesButton.setBackground(new Color(174, 196, 255));
+                timetablesButton.setBackground(new Color(174, 196, 255));
+                profileButton.setBackground(new Color(174, 196, 255));
+                mediButton.setBackground(new Color(174, 196, 255));
+                contactButton.setBackground(new Color(174, 196, 255));
+
+                courseDetailsButton.setForeground(new Color(0, 0, 0));
+                gradesAndGPAButton.setForeground(new Color(255, 255, 255));
+                noticesButton.setForeground(new Color(0, 0, 0));
+                timetablesButton.setForeground(new Color(0, 0, 0));
+                profileButton.setForeground(new Color(0, 0, 0));
+                mediButton.setForeground(new Color(0, 0, 0));
+                contactButton.setForeground(new Color(0, 0, 0));
             }
         });
         courseDetailsButton.addActionListener(new ActionListener() {
@@ -232,15 +276,27 @@ public class StudentForm2 extends JFrame {
                 jMain.repaint();
                 jMain.revalidate();
                 //courseDetailsButton.setSelected(true);
-                courseDetailsButton.setBackground(new Color(250, 247, 147));
-                gradesAndGPAButton.setBackground(Color.white);
-                noticesButton.setBackground(Color.white);
-                timetablesButton.setBackground(Color.white);
-                profileButton.setBackground(Color.white);
-                mediButton.setBackground(Color.white);
-                contactButton.setBackground(Color.white);
+                courseDetailsButton.setBackground(new Color(25, 118, 250));
+                gradesAndGPAButton.setBackground(new Color(174, 196, 255));
+                noticesButton.setBackground(new Color(174, 196, 255));
+                timetablesButton.setBackground(new Color(174, 196, 255));
+                profileButton.setBackground(new Color(174, 196, 255));
+                mediButton.setBackground(new Color(174, 196, 255));
+                contactButton.setBackground(new Color(174, 196, 255));
+
+                courseDetailsButton.setForeground(new Color(255, 255, 255));
+                gradesAndGPAButton.setForeground(new Color(0, 0, 0));
+                noticesButton.setForeground(new Color(0, 0, 0));
+                timetablesButton.setForeground(new Color(0, 0, 0));
+                profileButton.setForeground(new Color(0, 0, 0));
+                mediButton.setForeground(new Color(0, 0, 0));
+                contactButton.setForeground(new Color(0, 0, 0));
             }
         });
+        table_loadMEd();
+        table_loadCourse();
+        table_loadGrades();
+        table_loadNotice();
         try {
             //String sql = "select * from student where Std_id= " + Student.Std_id;
             pst = conn.prepareStatement("select * from student where Std_id= " + Student.Std_id);
@@ -546,7 +602,7 @@ public class StudentForm2 extends JFrame {
     }
     public static void main(String[] args) {
         //JFrame jFrame = new JFrame();
-        StudentForm2 sFr = new StudentForm2("ss");
+        StudentForm sFr = new StudentForm("ss");
 
     }
 
