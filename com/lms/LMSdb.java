@@ -10,9 +10,10 @@ public class LMSdb {
 
     public static Connection java_db()
     {
-        final String DB_URL = "jdbc:mysql://localhost/lms-java1";
+        final String DB_URL = "jdbc:mysql://localhost:3306/lms-java1";
         final String USERNAME = "root";
-        final String PASSWord = "jamzee";
+        final String PASSWord = "fayas63048906";
+
         try{
 
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWord);
