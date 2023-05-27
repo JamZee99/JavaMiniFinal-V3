@@ -36,6 +36,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Update contact details"/>
             </properties>
@@ -50,6 +51,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Course details"/>
             </properties>
@@ -64,6 +66,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Grades and GPA"/>
             </properties>
@@ -78,6 +81,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Timetables"/>
             </properties>
@@ -92,6 +96,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Notices"/>
             </properties>
@@ -106,6 +111,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Medical details"/>
             </properties>
@@ -120,6 +126,7 @@
             </constraints>
             <properties>
               <background color="-5323521"/>
+              <borderPainted value="false"/>
               <font size="16"/>
               <text value="Update profile picture"/>
             </properties>
@@ -434,15 +441,15 @@
               </component>
             </children>
           </grid>
-          <grid id="a8f89" binding="profilePic" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="a8f89" binding="profilePic" layout-manager="GridLayoutManager" row-count="3" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card2"/>
             </constraints>
             <properties>
               <background color="-67073"/>
-              <minimumSize width="457" height="432"/>
-              <preferredSize width="457" height="432"/>
+              <minimumSize width="457" height="300"/>
+              <preferredSize width="457" height="300"/>
             </properties>
             <border type="none"/>
             <children>
@@ -454,10 +461,10 @@
               <grid id="87093" binding="image" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <minimum-size width="600" height="400"/>
-                    <preferred-size width="600" height="400"/>
-                    <maximum-size width="600" height="400"/>
+                  <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <minimum-size width="500" height="350"/>
+                    <preferred-size width="500" height="350"/>
+                    <maximum-size width="500" height="350"/>
                   </grid>
                 </constraints>
                 <properties/>
@@ -486,43 +493,49 @@
               </vspacer>
               <component id="17298" class="javax.swing.JButton" binding="saveButton" default-binding="true">
                 <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                    <minimum-size width="200" height="70"/>
-                    <preferred-size width="200" height="70"/>
-                    <maximum-size width="200" height="70"/>
+                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="120" height="40"/>
+                    <preferred-size width="120" height="40"/>
+                    <maximum-size width="120" height="40"/>
                   </grid>
                 </constraints>
                 <properties>
+                  <background color="-15364092"/>
+                  <borderPainted value="false"/>
                   <text value="Save"/>
-                </properties>
-              </component>
-              <component id="5a878" class="javax.swing.JButton" binding="clearButton" default-binding="true">
-                <constraints>
-                  <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                    <minimum-size width="200" height="70"/>
-                    <preferred-size width="200" height="70"/>
-                    <maximum-size width="200" height="70"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <text value="Clear"/>
                 </properties>
               </component>
               <component id="5dfd" class="javax.swing.JButton" binding="chooseButton" default-binding="true">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                    <minimum-size width="200" height="70"/>
-                    <preferred-size width="200" height="70"/>
+                    <minimum-size width="120" height="40"/>
+                    <preferred-size width="120" height="40"/>
                     <maximum-size width="200" height="70"/>
                   </grid>
                 </constraints>
                 <properties>
+                  <background color="-37888"/>
+                  <borderPainted value="false"/>
                   <text value="Choose"/>
+                </properties>
+              </component>
+              <component id="5a878" class="javax.swing.JButton" binding="clearButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="120" height="40"/>
+                    <preferred-size width="120" height="40"/>
+                    <maximum-size width="120" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-65536"/>
+                  <borderPainted value="false"/>
+                  <text value="Clear"/>
                 </properties>
               </component>
             </children>
           </grid>
-          <grid id="32a4d" binding="medDtls" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="32a4d" binding="medDtls" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card3"/>
@@ -536,10 +549,10 @@
             <children>
               <scrollpane id="f9335" binding="table1">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <background color="-8355712"/>
+                  <background color="-16777216"/>
                   <font style="1"/>
                   <foreground color="-8355712"/>
                 </properties>
@@ -551,9 +564,22 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="858ea" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-16777216"/>
+                  <font name="Segoe UI" size="16" style="1"/>
+                  <foreground color="-16777216"/>
+                  <requestFocusEnabled value="false"/>
+                  <text value="Medical Details"/>
+                  <verifyInputWhenFocusTarget value="false"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="cfe69" binding="courseDtls" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="cfe69" binding="courseDtls" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card4"/>
@@ -565,7 +591,7 @@
             <children>
               <scrollpane id="d65d5">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -576,9 +602,19 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="c7f22" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Segoe UI" size="16" style="1"/>
+                  <foreground color="-16777216"/>
+                  <text value="Course Details"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="1fb58" binding="grades" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="1fb58" binding="grades" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card5"/>
@@ -588,7 +624,7 @@
             <children>
               <scrollpane id="bdb00">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -599,9 +635,20 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="b2c35" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <font name="Segoe UI" size="16" style="1"/>
+                  <foreground color="-16777216"/>
+                  <text value="Grades"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="98db7" binding="time" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="98db7" binding="time" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card6"/>
@@ -611,7 +658,7 @@
             <children>
               <scrollpane id="a9b3">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -622,9 +669,21 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="62154" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <doubleBuffered value="true"/>
+                  <font name="Segoe UI" size="16" style="1"/>
+                  <foreground color="-16777216"/>
+                  <text value="Timetable"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="f7076" binding="Notice" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="f7076" binding="Notice" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card7"/>
@@ -634,7 +693,7 @@
             <children>
               <scrollpane id="448b2">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -645,6 +704,17 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="5fad7" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <font name="Segoe UI" size="16" style="1"/>
+                  <foreground color="-16777216"/>
+                  <text value="Notice"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>

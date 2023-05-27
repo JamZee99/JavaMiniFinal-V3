@@ -75,17 +75,19 @@ public class StudentForm extends JFrame {
     private String gender;
     public String Department;
 
+    private String userId;
 
 
 
     int imgT = 0;
 
-    public StudentForm(String title) {
+    public StudentForm(String title,String userID) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(MainPane);
         this.pack();
         setVisible(true);
+        this.userId = userID;
         conn = LMSdb.java_db();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
@@ -569,7 +571,8 @@ public class StudentForm extends JFrame {
 
     void table_loadGrades() {
         try {
-            pst = conn.prepareStatement("SELECT * FROM marks");
+            pst = conn.prepareStatement("SELECT Std_id,Course_code,GPA,Quiz01,Quiz02,Quiz03,Quiz04 FROM marks WHERE Std_id= ?");
+            pst.setString(1,userId);
             ResultSet rs = pst.executeQuery();
             tableGrades.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
@@ -600,10 +603,10 @@ public class StudentForm extends JFrame {
 
 
     }
-    public static void main(String[] args) {
-        //JFrame jFrame = new JFrame();
-        StudentForm sFr = new StudentForm("ss");
-
-    }
+//    public static void main(String[] args) {
+//        //JFrame jFrame = new JFrame();
+//        StudentForm sFr = new StudentForm("ss");
+//
+//    }
 
 }
