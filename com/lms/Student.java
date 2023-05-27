@@ -2,7 +2,7 @@ package com.lms;
 
 public class Student {
 
-    public static String Std_id="740";
+    public static String Std_id;
     public static String Fname;
     public static String Lname;
     public static String Sex;

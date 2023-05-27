@@ -64,47 +64,43 @@ public class LoginPage extends JFrame{
                 String sql = "SELECT * FROM admin WHERE Ad_id="+userID;
 
                 String access = (comboPostion.getSelectedItem().toString());
-//                if (access == "Admin") {
-//
-//                    try {
-//                        int count = 0;
-//                        pst = conn.prepareStatement(sql);
-//
-//                        //pst.setString(1,txtUserID.getText());
-//                        // pst.setString(2,txtPwd.getText());
-//                        //pst.setString(1,comboPostion.getSelectedItem().toString());
-//
-//                        rs = pst.executeQuery(sql);
-//                        while (rs.next()) {
-//                            String id = rs.getString("Ad_id");
-//                            String Pass = rs.getString("Password");
-//                            AdminM.Ad_id = id;
-//                            AdminM.Password =Pass;
-//                            count = count + 1;
-//
-//                        }
-//                        //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
-//                        if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
-//                            JOptionPane.showMessageDialog(null, "Welcome "+access);
-//                            Admin admin = new Admin("admin form");
-//                            admin.setVisible(true);
-//                            dispose();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Dear Admin, UserId and Password you entered wrong");
-//                        }
-//
-//
-//                    } catch (Exception e) {
-//                        JOptionPane.showMessageDialog(null, "fill the fields");
-//                    } finally {
-//                        try {
-//                            rs.close();
-//                            pst.close();
-//                        } catch (Exception e) {
-//
-//                        }
-//                    }
-//                }
+                if (access == "Admin") {
+
+                    try {
+                        int count = 0;
+                        pst = conn.prepareStatement(sql);
+
+                        rs = pst.executeQuery(sql);
+                        while (rs.next()) {
+                            String id = rs.getString("Ad_id");
+                            String Pass = rs.getString("Password");
+                            AdminM.Ad_id = id;
+                            AdminM.Password =Pass;
+                            count = count + 1;
+
+                        }
+                        //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
+                        if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
+                            JOptionPane.showMessageDialog(null, "Welcome "+access);
+                            Admin admin = new Admin("admin form");
+                            admin.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Dear Admin, UserId and Password you entered wrong");
+                        }
+
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "fill the fields");
+                    } finally {
+                        try {
+                            rs.close();
+                            pst.close();
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
                 if (access == "Student") {
                     userID = txtUserID.getText();
                     //String sqlAdmin = "SELECT Std_id,Password FROM student where Std_id ="+userID;
@@ -121,7 +117,7 @@ public class LoginPage extends JFrame{
                         }
                         if (Objects.equals(userID, Student.Std_id) && Objects.equals(pwd, Student.Password)){
                             JOptionPane.showMessageDialog(null, "Welcome "+access);
-                            StudentForm studentForm2 = new StudentForm("Student from");
+                            StudentForm studentForm2 = new StudentForm("Student from",userID);
                             studentForm2.setVisible(true);
                             dispose();
                         } else {
@@ -176,42 +172,42 @@ public class LoginPage extends JFrame{
 //                        }
 //                    }
 //                }
-//                if (access == "Lecturer") {
-//                    userID = txtUserID.getText();
-//                    String sqlLecturer = "SELECT Lec_id,Password FROM lecturer where Lec_id ="+userID;
-//
-//                    try {
-//
-//                        pst = conn.prepareStatement(sqlLecturer);
-//                        rs3 = pst.executeQuery(sqlLecturer);
-//                        while (rs3.next()) {
-//                            String id = rs3.getString("Lec_id");
-//                            String Pass = rs3.getString("Password");
-//                            LecturerM.LecId = id;
-//                            LecturerM.Password = Pass;
-//                        }
-//                        if (Objects.equals(userID, LecturerM.LecId) && Objects.equals(pwd, LecturerM.Password))
-//                        {
-//                            JOptionPane.showMessageDialog(null, "Welcome "+access);
-//                            Lecturer lecture = new Lecturer("PanelLecturer");
-//                            lecture.setVisible(true);
-//                            dispose();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Dear Lecturer, UserId and Password you entered wrong " );
-//                        }
-//
-//                    } catch (Exception e) {
-//                        JOptionPane.showMessageDialog(null,"fill the fields");
-//                    }
-//                    finally {
-//                        try {
-//                            rs3.close();
-//                            pst.close();
-//                        } catch (Exception e) {
-//                            //JOptionPane.showMessageDialog(null,e);
-//                        }
-//                    }
-//                }
+                if (access == "Lecturer") {
+                    userID = txtUserID.getText();
+                    String sqlLecturer = "SELECT Lec_id,Password FROM lecturer where Lec_id ="+userID;
+
+                    try {
+
+                        pst = conn.prepareStatement(sqlLecturer);
+                        rs3 = pst.executeQuery(sqlLecturer);
+                        while (rs3.next()) {
+                            String id = rs3.getString("Lec_id");
+                            String Pass = rs3.getString("Password");
+                            LecturerM.LecId = id;
+                            LecturerM.Password = Pass;
+                        }
+                        if (Objects.equals(userID, LecturerM.LecId) && Objects.equals(pwd, LecturerM.Password))
+                        {
+                            JOptionPane.showMessageDialog(null, "Welcome "+access);
+                            Lecturer lecture = new Lecturer("PanelLecturer");
+                            lecture.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Dear Lecturer, UserId and Password you entered wrong " );
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,"fill the fields");
+                    }
+                    finally {
+                        try {
+                            rs3.close();
+                            pst.close();
+                        } catch (Exception e) {
+                            //JOptionPane.showMessageDialog(null,e);
+                        }
+                    }
+                }
             }});
 
         CLEARButton.addActionListener(new ActionListener() {
@@ -221,65 +217,67 @@ public class LoginPage extends JFrame{
                 txtPwd.setText("");
             }
         });
-//        donTHaveAnButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent evt) {
-//                String access = (comboPostion.getSelectedItem().toString());
-//                userID = txtUserID.getText();
-//
-//                pwd = txtPwd.getText();
-//                String sql = "SELECT * FROM admin WHERE Ad_id="+userID;
-//                try {
-//                    if (access == "Admin") {
-//
-//                        try {
-//                            int count = 0;
-//                            pst = conn.prepareStatement(sql);
-//
-//                            //pst.setString(1,txtUserID.getText());
-//                            // pst.setString(2,txtPwd.getText());
-//                            //pst.setString(1,comboPostion.getSelectedItem().toString());
-//
-//                            rs = pst.executeQuery(sql);
-//                            while (rs.next()) {
-//                                String id = rs.getString("Ad_id");
-//                                String Pass = rs.getString("Password");
-//                                AdminM.Ad_id = id;
-//                                AdminM.Password =Pass;
-//                                count = count + 1;
-//
-//                            }
-//                            //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
-//                            if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
-//                                JOptionPane.showMessageDialog(null, "Welcome "+access);
-//                                AdminForm ad = new AdminForm("LoginForm");
-//                                ad.setVisible(true);
-//                                dispose();
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "Dear Admin, UserId and Password you entered wrong");
-//                            }
-//
-//
-//                        } catch (Exception e) {
-//                            JOptionPane.showMessageDialog(null, "fill the fields");
-//                        } finally {
-//                            try {
-//                                rs.close();
-//                                pst.close();
-//                            } catch (Exception e) {
-//
-//                            }
-//                        }
-//                    }
-//                    else {
-//                        JOptionPane.showMessageDialog(null,"Admin can only register users");
-//                    }
-//
-//                } catch (Exception e) {
-//                    JOptionPane.showMessageDialog(null, e);
-//                }
-//            }
-//        });
+        donTHaveAnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                String access = (comboPostion.getSelectedItem().toString());
+                userID = txtUserID.getText();
+
+                pwd = txtPwd.getText();
+                String sql = "SELECT * FROM admin WHERE Ad_id="+userID;
+
+                try {
+                    if (access == "Admin") {
+
+                        try {
+                            int count = 0;
+                            pst = conn.prepareStatement(sql);
+
+                            //pst.setString(1,txtUserID.getText());
+                            // pst.setString(2,txtPwd.getText());
+                            //pst.setString(1,comboPostion.getSelectedItem().toString());
+
+                            rs = pst.executeQuery(sql);
+                            while (rs.next()) {
+                                String id = rs.getString("Ad_id");
+                                String Pass = rs.getString("Password");
+                                AdminM.Ad_id = id;
+                                AdminM.Password =Pass;
+                                count = count + 1;
+
+                            }
+                            //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
+                            if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
+                                JOptionPane.showMessageDialog(null, "Welcome "+access);
+                                Admin ad = new Admin("LoginForm");
+                                ad.setVisible(true);
+                                dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Dear Admin, UserId and Password you entered wrong");
+                            }
+
+
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "fill the fields");
+                        } finally {
+                            try {
+                                rs.close();
+                                pst.close();
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Admin can only register users");
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+        });
+
     }
     public void currentDate(){
         Calendar cal=new GregorianCalendar();
