@@ -49,19 +49,7 @@ public class Lecturer extends JFrame {
     private JTextField textStdID;
     private JButton searchButton;
     private JTable tableAtt;
-    private JTextField txtStartDate;
-    private JTextField txtEndDate;
-    private JTextField txtStdID;
-    private JTextField txtCourseID;
-    private JTextField searchMedi_ID;
-    private JTextField searchStudent_ID;
-    private JButton btnAdd;
-    private JButton btnDelete;
     private JTable tblMedi;
-    private JComboBox comboBox2;
-    private JButton btnModify;
-    private JButton btnSearch;
-    private JButton searchMed;
     private JButton btn_Show_marks;
     private JButton btn_Attendance;
     private JButton btn_Medical;
@@ -160,6 +148,7 @@ public class Lecturer extends JFrame {
         tableStudent();
         tableNotice();
         tableAtten();
+        tableMedi();
         //table_load();
 
         btn_Student_details.addActionListener(new ActionListener() {
@@ -959,6 +948,38 @@ public class Lecturer extends JFrame {
                 finalStudId.requestFocus();
             }
         });
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginPage("Lecture Form");
+                dispose();
+            }
+        });
+
+        //Search Student attendence...
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id;
+                id = textStdID.getText();
+                if(id.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Please enter the Student Id..!");
+                }
+                else {
+                    try {
+                        pst = conn.prepareStatement("SELECT * FROM att_summ WHERE Std_id = ?");
+                        pst.setString(1,id);
+                        ResultSet atendenceDetails = pst.executeQuery();
+                        tableAtt.setModel(DbUtils.resultSetToTableModel(atendenceDetails));
+
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
+            }
+        });
     }
 
 
@@ -1097,6 +1118,23 @@ public class Lecturer extends JFrame {
             e.printStackTrace();
         }
     }
+
+    //Medical Details data...
+    public void tableMedi(){
+        try{
+            pst = conn.prepareStatement("SELECT * FROM medical");
+            ResultSet mediTable = pst.executeQuery();
+            tblMedi.setModel(DbUtils.resultSetToTableModel(mediTable));
+        }
+
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 }
