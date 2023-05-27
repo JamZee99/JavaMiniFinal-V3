@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+import static com.lms.LecturerM.*;
+
 
 public class LoginPage extends JFrame{
 
@@ -136,57 +138,60 @@ public class LoginPage extends JFrame{
                         }
                     }
                 }
-//                if (access == "Technical Officer") {
-//                    String userIDt = txtUserID.getText();
-//                    //String sqlTecOfficer = "SELECT Tec_id,Password FROM tecofficer where Tec_id ="+userID;
-//
-//                    try {
-//
-//                        pst = conn.prepareStatement("SELECT Tec_id,Password FROM tecofficer where Tec_id =?");
-//                        pst.setString(1,userIDt);
-//                        rs2 = pst.executeQuery();
-//                        while (rs2.next()) {
-//                            String id = rs2.getString("Tec_id");
-//                            String Pass = rs2.getString("Password");
-//                            TechOfficer.TecId = id;
-//                            TechOfficer.Password = Pass;
-//                        }
-//                        if ((Objects.equals(userIDt, TechOfficer.TecId)) && Objects.equals(pwd, TechOfficer.Password)){
-//                            JOptionPane.showMessageDialog(null, "Welcome "+access);
-//                            Tec_Offc tec_Offc = new Tec_Offc("Tec log");
-//                            tec_Offc.setVisible(true);
-//                            dispose();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Dear Technical Officer, UserId and Password you entered wrong " );
-//                        }
-//
-//                    } catch (Exception e) {
-//                        JOptionPane.showMessageDialog(null,e);
-//                    }
-//                    finally {
-//                        try {
-//                            rs2.close();
-//                            pst.close();
-//                        } catch (Exception e) {
-//                            //JOptionPane.showMessageDialog(null,e);
-//                        }
-//                    }
-//                }
+                if (access == "Technical Officer") {
+                    String userIDt = txtUserID.getText();
+                    //String sqlTecOfficer = "SELECT Tec_id,Password FROM tecofficer where Tec_id ="+userID;
+
+                    try {
+
+                        pst = conn.prepareStatement("SELECT Tec_id,Password FROM tecofficer where Tec_id =?");
+                        pst.setString(1,userIDt);
+                        rs2 = pst.executeQuery();
+                        TecOfficer tO = new TecOfficer();
+                        while (rs2.next()) {
+                            String id = rs2.getString("Tec_id");
+                            String Pass = rs2.getString("Password");
+                            tO.setLecId(id);
+                            tO.setPassword(Pass);
+                        }
+                        if ((Objects.equals(userIDt, tO.getLecId())) && Objects.equals(pwd, tO.getPassword())){
+                            JOptionPane.showMessageDialog(null, "Welcome "+access);
+                            Tec_Offc tec_Offc = new Tec_Offc("Tec log");
+                            tec_Offc.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Dear Technical Officer, UserId and Password you entered wrong " );
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,e);
+                    }
+                    finally {
+                        try {
+                            rs2.close();
+                            pst.close();
+                        } catch (Exception e) {
+                            //JOptionPane.showMessageDialog(null,e);
+                        }
+                    }
+                }
                 if (access == "Lecturer") {
                     userID = txtUserID.getText();
                     String sqlLecturer = "SELECT Lec_id,Password FROM lecturer where Lec_id ="+userID;
 
                     try {
 
+                        LecturerM lc =new LecturerM();
                         pst = conn.prepareStatement(sqlLecturer);
                         rs3 = pst.executeQuery(sqlLecturer);
+
                         while (rs3.next()) {
                             String id = rs3.getString("Lec_id");
                             String Pass = rs3.getString("Password");
-                            LecturerM.LecId = id;
-                            LecturerM.Password = Pass;
+                            lc.setLecId(id);
+                            lc.setPassword(Pass);
                         }
-                        if (Objects.equals(userID, LecturerM.LecId) && Objects.equals(pwd, LecturerM.Password))
+                        if (Objects.equals(userID, lc.getLecId()) && Objects.equals(pwd, lc.getPassword()))
                         {
                             JOptionPane.showMessageDialog(null, "Welcome "+access);
                             Lecturer lecture = new Lecturer("PanelLecturer");

@@ -7,13 +7,13 @@
     </constraints>
     <properties>
       <background color="-15108358"/>
-      <minimumSize width="1200" height="750"/>
-      <preferredSize width="1200" height="750"/>
+      <minimumSize width="1484" height="870"/>
+      <preferredSize width="1484" height="870"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="cbcbd" layout-manager="GridLayoutManager" row-count="12" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="10" bottom="6" right="10"/>
+      <grid id="cbcbd" layout-manager="GridLayoutManager" row-count="11" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="30" bottom="6" right="10"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="350" height="700"/>
@@ -43,7 +43,7 @@
           </component>
           <component id="cc025" class="javax.swing.JButton" binding="courseDetailsButton" default-binding="true">
             <constraints>
-              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="40"/>
                 <preferred-size width="-1" height="40"/>
                 <maximum-size width="-1" height="40"/>
@@ -58,7 +58,7 @@
           </component>
           <component id="370a0" class="javax.swing.JButton" binding="gradesAndGPAButton" default-binding="true">
             <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="40"/>
                 <preferred-size width="-1" height="40"/>
                 <maximum-size width="-1" height="40"/>
@@ -73,7 +73,7 @@
           </component>
           <component id="a51f8" class="javax.swing.JButton" binding="timetablesButton" default-binding="true">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="40"/>
                 <preferred-size width="-1" height="40"/>
                 <maximum-size width="-1" height="40"/>
@@ -88,7 +88,7 @@
           </component>
           <component id="2927" class="javax.swing.JButton" binding="noticesButton" default-binding="true">
             <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="40"/>
                 <preferred-size width="-1" height="40"/>
                 <maximum-size width="-1" height="40"/>
@@ -103,7 +103,7 @@
           </component>
           <component id="2675f" class="javax.swing.JButton" binding="mediButton">
             <constraints>
-              <grid row="5" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="4" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="40"/>
                 <preferred-size width="-1" height="40"/>
                 <maximum-size width="-1" height="40"/>
@@ -118,7 +118,7 @@
           </component>
           <component id="75f14" class="javax.swing.JButton" binding="profileButton">
             <constraints>
-              <grid row="1" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="-1" height="40"/>
                 <preferred-size width="-1" height="40"/>
                 <maximum-size width="-1" height="40"/>
@@ -133,7 +133,7 @@
           </component>
           <vspacer id="5a563">
             <constraints>
-              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>
@@ -141,9 +141,9 @@
       <grid id="3474e" binding="jMain" layout-manager="CardLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="2" indent="0" use-parent-layout="false">
-            <minimum-size width="920" height="-1"/>
-            <preferred-size width="920" height="-1"/>
-            <maximum-size width="920" height="-1"/>
+            <minimum-size width="1150" height="-1"/>
+            <preferred-size width="1150" height="-1"/>
+            <maximum-size width="1150" height="-1"/>
           </grid>
         </constraints>
         <properties/>

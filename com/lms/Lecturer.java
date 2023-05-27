@@ -139,11 +139,13 @@ public class Lecturer extends JFrame {
     private JTextField gradID;
     private JButton gradeSearch;
     private JScrollPane caMA;
-    private JTable gpaTable;
+    private JTable gpaTablee;
     private JTextField gpaID;
     private JButton gpaSearch;
     private JTable elig_table;
     private JButton showEligibilityButton;
+    private JTextField eligiID;
+    private JButton EligiSearch;
 
     public int countPresent = 0;
     public String gender;
@@ -556,11 +558,9 @@ public class Lecturer extends JFrame {
                 String qMarks = mak.getText();
                 //System.out.println("You select " + quizMarks);
 
-                if(studentID.isEmpty() || qMarks.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Please fill the all field..!");
-                }
-
-                else{
+                if (studentID.isEmpty() || qMarks.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill the all field..!");
+                } else {
                     if (quizMarks == "Quiz01") {
                         try {
 
@@ -669,11 +669,9 @@ public class Lecturer extends JFrame {
                 String asseSele = (String) assSelect.getSelectedItem();
                 String assesMarks = textAssesMarks.getText();
 
-                if(stuId.isEmpty() || assesMarks.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Please fill the all field..!");
-                }
-
-                else{
+                if (stuId.isEmpty() || assesMarks.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill the all field..!");
+                } else {
                     if (subCode != "ICT01") {
                         if (asseSele == "Assessments01") {
                             try {
@@ -781,11 +779,9 @@ public class Lecturer extends JFrame {
                 String studId = theStudId.getText();
                 String finMark = therMarks.getText();
 
-                if(studId.isEmpty() || finMark.isEmpty()){
+                if (studId.isEmpty() || finMark.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill the all field..!");
-                }
-
-                else{
+                } else {
                     try {
                         pst = conn.prepareStatement("UPDATE marks set Final_theory= ? where Std_id = ? && Course_code = ? ");
                         pst.setString(1, finMark);
@@ -815,10 +811,9 @@ public class Lecturer extends JFrame {
                 String studId = finalStudId.getText();
                 String finMark = finalMarks.getText();
 
-                if(studId.isEmpty() ||  finMark.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Please fill the all field..!");
-                }
-                else{
+                if (studId.isEmpty() || finMark.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill the all field..!");
+                } else {
                     if (subCode != "ICT02") {
                         try {
                             pst = conn.prepareStatement("UPDATE marks set Final_practical= ? where Std_id = ? && Course_code = ? ");
@@ -858,12 +853,12 @@ public class Lecturer extends JFrame {
                 //String lecId = String.valueOf(2);
 
                 try {
-                    pst = conn.prepareStatement("UPDATE lecturer set Fname = ?,Lname= ? ,Email= ?,DOB= ?,Pno=? where Lec_id = 2 ");
+                    pst = conn.prepareStatement("UPDATE lecturer set Fname = ?,Lname= ? ,Email= ?,DOB= ?,Pno=? where Lec_id = 1 ");
                     pst.setString(1, fName);
                     pst.setString(2, lName);
                     pst.setString(3, e_mail);
                     pst.setString(4, DOB);
-                    pst.setString(5,pno);
+                    pst.setString(5, pno);
 
 
                     // pst.setString(5,lecId);
@@ -878,6 +873,7 @@ public class Lecturer extends JFrame {
                     textLecPho.setText("");
                     firstname.requestFocus();
 
+                    lacture_details();
                     lacture_details();
 
 
@@ -998,10 +994,11 @@ public class Lecturer extends JFrame {
                 String id;
                 id = textStdID.getText();
                 if (id.isEmpty()) {
+                    tableAtten();
                     JOptionPane.showMessageDialog(null, "Please enter the Student Id..!");
                 } else {
                     try {
-                        pst = conn.prepareStatement("SELECT * FROM att_summ WHERE Std_id = ?");
+                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Std_id = ?");
                         pst.setString(1, id);
                         ResultSet atendenceDetails = pst.executeQuery();
                         tableAtt.setModel(DbUtils.resultSetToTableModel(atendenceDetails));
@@ -1020,6 +1017,7 @@ public class Lecturer extends JFrame {
                 String id;
                 id = shoMarId.getText();
                 if (id.isEmpty()) {
+                    tableMarks();
                     JOptionPane.showMessageDialog(null, "Please enter the Student Id..!");
                 } else {
                     try {
@@ -1044,6 +1042,7 @@ public class Lecturer extends JFrame {
                 String id;
                 id = caMarId.getText();
                 if (id.isEmpty()) {
+                    caTableMarks();
                     JOptionPane.showMessageDialog(null, "Please enter the Student Id..!");
                 } else {
                     try {
@@ -1068,6 +1067,7 @@ public class Lecturer extends JFrame {
                 String id;
                 id = gradID.getText();
                 if (id.isEmpty()) {
+                    graTable();
                     JOptionPane.showMessageDialog(null, "Please enter the Student Id..!");
                 } else {
                     try {
@@ -1093,13 +1093,14 @@ public class Lecturer extends JFrame {
                 String id;
                 id = gpaID.getText();
                 if (id.isEmpty()) {
+                    gpaTable();
                     JOptionPane.showMessageDialog(null, "Please enter the Student Id..!");
                 } else {
                     try {
                         pst = conn.prepareStatement("SELECT Std_id,Course_code,GPA FROM marks WHERE Std_id = ?");
                         pst.setString(1, id);
                         ResultSet searchGpaMarks = pst.executeQuery();
-                        gpaTable.setModel(DbUtils.resultSetToTableModel(searchGpaMarks));
+                        gpaTablee.setModel(DbUtils.resultSetToTableModel(searchGpaMarks));
 
 
                     } catch (SQLException ex) {
@@ -1109,11 +1110,13 @@ public class Lecturer extends JFrame {
                 }
             }
         });
+
+
         showEligibilityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    pst = conn.prepareStatement("select distinct marks.Std_id,Att_percentage,CA_status,Course_code from att_summ inner join marks where marks.CA_status='pass'AND att_summ.att_percentage>80;");
+                    pst = conn.prepareStatement("select distinct att_summ.Std_id,Att_percentage,CA_status,Course_code from att_summ inner join marks where marks.CA_status='pass'AND att_summ.att_percentage>80;");
                     ResultSet rs = pst.executeQuery();
                     elig_table.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -1122,8 +1125,34 @@ public class Lecturer extends JFrame {
                 }
             }
         });
-    }
 
+        //Eligibility Search button..
+
+        EligiSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id;
+                id = eligiID.getText();
+                if (id.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(null, "Please enter the Student Id..!");
+                } else {
+                    try {
+                        pst = conn.prepareStatement("select distinct att_summ.Std_id,Att_percentage,CA_status,Course_code from att_summ inner join marks where marks.CA_status='pass'AND att_summ.att_percentage>80 AND att_summ.Std_id=?;");
+                        pst.setString(1, id);
+                        ResultSet searchEliMarks = pst.executeQuery();
+                        elig_table.setModel(DbUtils.resultSetToTableModel(searchEliMarks));
+
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
+
+            }
+        });
+    }
 
     // Lecture Details Shows...
     public void lacture_details() {
@@ -1649,7 +1678,7 @@ public class Lecturer extends JFrame {
         try {
             pst = conn.prepareStatement("SELECT Std_id,Course_code,GPA FROM marks");
             ResultSet marksTab = pst.executeQuery();
-            gpaTable.setModel(DbUtils.resultSetToTableModel(marksTab));
+            gpaTablee.setModel(DbUtils.resultSetToTableModel(marksTab));
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();

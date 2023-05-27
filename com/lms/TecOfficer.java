@@ -1,15 +1,16 @@
 package com.lms;
 
-public class LecturerM {
-    private String LecId;
+public class TecOfficer {
+
+    private String TecId ;
     private String Password;
 
     public String getLecId() {
-        return LecId;
+        return TecId;
     }
 
-    public void setLecId(String lecId) {
-        LecId = lecId;
+    public void setLecId(String tecId) {
+        TecId = tecId;
     }
 
     public String getPassword() {

@@ -547,11 +547,18 @@ public class StudentForm extends JFrame {
         table_loadTime();
 
 
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                imgIco.setIcon(null);
+            }
+        });
     }
 
     void table_loadMEd() {
         try {
-            pst = conn.prepareStatement("SELECT * FROM medical");
+            pst = conn.prepareStatement("SELECT S_date,E_date,Std_id,Course_id,Status FROM medical where Std_id=?");
+            pst.setString(1,userId);
             ResultSet rs = pst.executeQuery();
             medTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
@@ -561,7 +568,8 @@ public class StudentForm extends JFrame {
 
     void table_loadCourse() {
         try {
-            pst = conn.prepareStatement("SELECT * FROM course");
+            pst = conn.prepareStatement("SELECT * FROM course WHERE Std_id = ?");
+            pst.setString(1,userId);
             ResultSet rs = pst.executeQuery();
             tableCourse.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
@@ -571,7 +579,7 @@ public class StudentForm extends JFrame {
 
     void table_loadGrades() {
         try {
-            pst = conn.prepareStatement("SELECT Std_id,Course_code,GPA,Quiz01,Quiz02,Quiz03,Quiz04 FROM marks WHERE Std_id= ?");
+            pst = conn.prepareStatement("SELECT Std_id,Subject_code,GPA,Quiz01,Quiz02,Quiz03,Quiz04 FROM marks WHERE Std_id= ?");
             pst.setString(1,userId);
             ResultSet rs = pst.executeQuery();
             tableGrades.setModel(DbUtils.resultSetToTableModel(rs));
