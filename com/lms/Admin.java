@@ -154,7 +154,6 @@ public class Admin extends JFrame {
         this.pack();
         setVisible(true);
         conn = LMSdb_siyam.java_db();
-
         Notice();
 
         Btn_Maintain_user.addActionListener(new ActionListener() {

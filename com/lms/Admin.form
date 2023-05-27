@@ -23,6 +23,7 @@
         </constraints>
         <properties>
           <background color="-15108358"/>
+          <focusCycleRoot value="true"/>
         </properties>
         <border type="none"/>
         <children>
