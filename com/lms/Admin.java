@@ -492,13 +492,17 @@ public class Admin extends JFrame {
 
                     pst = conn.prepareStatement("UPDATE course SET lec_id = ?,course_name = ?,ad_id = ? where subject_code = ?");
 
+
                     pst.setString(1, lec_id);
                     pst.setString(2, course_name);
                     pst.setString(3, ad_id);
                     pst.setString(4,subject_code);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Course Details Updated");
+                    if(pst.executeUpdate()== 1){
+                        JOptionPane.showMessageDialog(null, "--Course Details Updated--");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "!!!--Course Details Not Updated--!!!");
+                    }
                     table1_load();
 
                     txtLecid.setText("");
@@ -2812,10 +2816,15 @@ public class Admin extends JFrame {
                 }
             }
         });
-
         /* ---------------------------------------- TIME TABLES END ----------------------------------------  */
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginPage("Siyam");
+                dispose();
+            }
+        });
     }
-
     private void Empty_set(JTextField txtTm, JTextField txtMon, JTextField txtTue, JTextField txtWed, JTextField txtThu, JTextField txtFri) {
         txt_tm.setText("");
         txtMon.setText("");
@@ -2831,7 +2840,6 @@ public class Admin extends JFrame {
         txtThu.setText(thu);
         txtFri.setText(fri);
     }
-
     //tm tbl loads
     private void l4s2et_load() {   //L4 S2 ET Table
         try {

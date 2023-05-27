@@ -142,7 +142,7 @@ public class Lecturer extends JFrame {
         this.setContentPane(tecMainPane);
         this.pack();
         setVisible(true);
-        conn = LMSdb.java_db();
+        conn = LMSdb_siyam.java_db();
         lacture_details();
         lactureShowDetailsShows();
         tableStudent();
