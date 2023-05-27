@@ -38,7 +38,7 @@ public class Admin extends JFrame {
     private JTextField txtfnameA;
     private JRadioButton maleRadioButton =null;
     private JRadioButton femaleRadioButton;
-    private JTextField setText;
+    private JTextField txtlnameA;
     private JLabel txtFname;
     private JLabel txtLname;
     private JPanel Maintain_Time_table;
@@ -327,14 +327,14 @@ public class Admin extends JFrame {
                         txtadmid.setText(id);
                         txtphnA.setText(pno);
                         txtfnameA.setText(fname);
-                        setText.setText(lname);
+                        txtlnameA.setText(lname);
 
 
                     } else {
                         txtadmid.setText("");
                         txtphnA.setText("");
                         txtfnameA.setText("");
-                        setText.setText("");
+                        txtlnameA.setText("");
                         JOptionPane.showMessageDialog(null, "Invalid Admin ID");
                     }
 
@@ -355,7 +355,7 @@ public class Admin extends JFrame {
                     ad_id = txtadmid.getText();
                     pno = txtphnA.getText();
                     fname = txtfnameA.getText();
-                    lname = setText.getText();
+                    lname = txtlnameA.getText();
 
                     pst = conn.prepareStatement("UPDATE admin SET fname = ?,lname = ?,pno = ? where ad_id = ?");
 
@@ -364,19 +364,21 @@ public class Admin extends JFrame {
                     pst.setString(3, pno);
                     pst.setString(4, ad_id);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Updated");
-                    //table_load();
+                    if(ad_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record Not Updated");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Updated");
+                    }
 
                     txtadmid.setText("");
                     txtphnA.setText("");
                     txtfnameA.setText("");
-                    setText.setText("");
+                    txtlnameA.setText("");
 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
-
             }
         });
         /* -----------------------------ENDING USER PROFILE------------------------------------- */
@@ -403,10 +405,13 @@ public class Admin extends JFrame {
                     pst.setString(2, subject_code);
                     pst.setString(3, course_name);
                     pst.setString(4, ad_id);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "New Course Added!!!");
-                    table1_load();
-
+                    if(subject_code.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "New Course Cannot be Added!!!");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "New Course Added!!!");
+                        table1_load();
+                    }
                     txtLecid.setText("");
                     txtCC.setText("");
                     txtCName.setText("");
@@ -462,15 +467,18 @@ public class Admin extends JFrame {
                 try {
                     pst = conn.prepareStatement("DELETE FROM course WHERE subject_code = ?");
                     pst.setString(1, subject_code);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Deleted");
-                    table1_load();
 
+                    if(subject_code.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "--Record NOT Deleted--Enter valid Details");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Deleted");
+                        table1_load();
+                    }
                     txtLecid.setText("");
                     txtCName.setText("");
                     txtAdid.setText("");
                     txtCC.setText("");
-
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -491,7 +499,6 @@ public class Admin extends JFrame {
                     ad_id = txtAdid.getText();
 
                     pst = conn.prepareStatement("UPDATE course SET lec_id = ?,course_name = ?,ad_id = ? where subject_code = ?");
-
 
                     pst.setString(1, lec_id);
                     pst.setString(2, course_name);
@@ -592,10 +599,13 @@ public class Admin extends JFrame {
                     pst.setString(6, sex);
                     pst.setString(7, password);
                     pst.setString(8, ad_id);
-
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Updated");
-                    table4_load();
+                    if(ad_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT UPDATED");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record UPDATED");
+                        table4_load();
+                    }
 
                     txtadmID.setText("");
                     txtphnAdm.setText("");
@@ -622,9 +632,13 @@ public class Admin extends JFrame {
                 try {
                     pst = conn.prepareStatement("DELETE FROM admin WHERE ad_id = ?");
                     pst.setString(1, ad_id);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Deleted");
-                    table4_load();
+                    if(ad_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT DELETED");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record DELETED");
+                        table4_load();
+                    }
 
                     txtadmID.setText("");
                     txtphnAdm.setText("");
@@ -671,9 +685,13 @@ public class Admin extends JFrame {
                     pst.setString(7, dob);
                     pst.setString(8, email);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Added!!!");
-                    table4_load();
+                    if(ad_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT ADDED");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record ADDED");
+                        table4_load();
+                    }
 
                     txtadmID.setText("");
                     txtphnAdm.setText("");
@@ -722,9 +740,15 @@ public class Admin extends JFrame {
                     pst.setString(7, dob);
                     pst.setString(8, email);
                     pst.setString(9, username);
+
+                    if(lec_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Added");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Added");
+                        table3_load();
+                    }
                     pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Added!!!");
-                    table3_load();
 
                     txtlecid.setText("");
                     txtphnL.setText("");
@@ -820,9 +844,13 @@ public class Admin extends JFrame {
                     pst.setString(8,username);
                     pst.setString(9,lec_id);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Updated");
-                    table3_load();
+                    if(lec_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Updated");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Updated");
+                        table3_load();
+                    }
 
                     txtlecid.setText("");
                     txtphnL.setText("");
@@ -849,9 +877,13 @@ public class Admin extends JFrame {
                 try {
                     pst = conn.prepareStatement("DELETE FROM lecturer WHERE lec_id = ?");
                     pst.setString(1, lec_id);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Deleted");
-                    table3_load();
+                    if(lec_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Deleted");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Deleted");
+                        table3_load();
+                    }
 
                     txtlecid.setText("");
                     txtphnL.setText("");
@@ -886,14 +918,11 @@ public class Admin extends JFrame {
                 department = txtDepstd.getText();
 
                 try {
-                    //Connection con = DriverManager.getConnection(DB_URL, USERNAME,PASSWORD);
-                    //DB CONNECTED SUCCESSFULLY
                     String sql;
                     sql = "INSERT INTO Student(std_id,pno,password,fname,lname,sex,dob,email,address,department)" +
                             "VALUES(?,?,?,?,?,?,?,?,?,?)";
                     pst = conn.prepareStatement(sql);
 
-                    //PreparedStatement pst = con.prepareStatement(sql);
                     pst.setString(1, std_id);
                     pst.setString(2, pno);
                     pst.setString(3, password);
@@ -904,9 +933,15 @@ public class Admin extends JFrame {
                     pst.setString(8, email);
                     pst.setString(9, address);
                     pst.setString(10, department);
+
+                    if(std_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Added");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Added");
+                        table2_load();
+                    }
                     pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Added!!!");
-                    table2_load();
 
                     txtStdid.setText("");
                     txtphnstd.setText("");
@@ -958,10 +993,13 @@ public class Admin extends JFrame {
                     pst.setString(9, department);
                     pst.setString(10, std_id);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Updated");
-                    table2_load();
-
+                    if(std_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Updated");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Updated");
+                        table2_load();
+                    }
                     txtStdid.setText("");
                     txtphnstd.setText("");
                     txtpwStd.setText("");
@@ -1038,9 +1076,14 @@ public class Admin extends JFrame {
                 try {
                     pst = conn.prepareStatement("DELETE FROM student WHERE std_id = ?");
                     pst.setString(1, std_id);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Deleted");
-                    table2_load();
+
+                    if(std_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT DELETED");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record DELETED");
+                        table2_load();
+                    }
 
                     txtStdid.setText("");
                     txtphnstd.setText("");
@@ -1088,9 +1131,13 @@ public class Admin extends JFrame {
                     pst.setString(6, email);
                     pst.setString(7, password);
                     pst.setString(8, dob);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Added!!!");
-                    table5_load();
+                    if(tec_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Added");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Added");
+                        table5_load();
+                    }
 
                     txttoid.setText("");
                     txtphnT.setText("");
@@ -1162,9 +1209,13 @@ public class Admin extends JFrame {
                 try {
                     pst = conn.prepareStatement("DELETE FROM tecofficer WHERE tec_id = ?");
                     pst.setString(1, tec_id);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Deleted");
-                    table5_load();
+                    if(tec_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Deleted");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Deleted");
+                        table5_load();
+                    }
 
                     txttoid.setText("");
                     txtphnT.setText("");
@@ -1207,9 +1258,13 @@ public class Admin extends JFrame {
                     pst.setString(7, dob);
                     pst.setString(8,tec_id);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Updated");
-                    table5_load();
+                    if(tec_id.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT UPDATED");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record UPDATED");
+                        table5_load();
+                    }
 
                     txttoid.setText("");
                     txtphnT.setText("");
@@ -1252,9 +1307,13 @@ public class Admin extends JFrame {
                     pst.setString(3, ndate);
                     pst.setString(4, ad_id);
                     pst.setString(5, message);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "New Notice Added!!!");
-                    table6_load();
+                    if(notice_no.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Notice NOT ADDED");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "New Notice Added!!!");
+                        table6_load();
+                    }
 
                     txtnoticeno.setText("");
                     txtNoticeTitle.setText("");
@@ -1313,10 +1372,13 @@ public class Admin extends JFrame {
                 try {
                     pst = conn.prepareStatement("DELETE FROM notice WHERE notice_no = ?");
                     pst.setString(1, notice_no);
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Record Deleted");
-                    table6_load();
-
+                    if(notice_no.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Record NOT Deleted");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Record Deleted!!!");
+                        table6_load();
+                    }
                     txtnoticeno.setText("");
                     txtNoticeTitle.setText("");
                     txtadmNOT.setText("");
@@ -1349,9 +1411,13 @@ public class Admin extends JFrame {
                     pst.setString(4,message);
                     pst.setString(5,notice_no);
 
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Notice Updated");
-                    table6_load();
+                    if(notice_no.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Notice NOT Updated");
+                    }else{
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Notice Updated!!!");
+                        table6_load();
+                    }
 
                     txtnoticeno.setText("");
                     txtNoticeTitle.setText("");
@@ -2216,6 +2282,7 @@ public class Admin extends JFrame {
                     dep = (String) txtDept.getSelectedItem();
 
                     //L1 S1 BST
+                    boolean b = time.isEmpty() || mon.isEmpty() || tue.isEmpty() || wed.isEmpty() || thu.isEmpty() || fri.isEmpty();
                     if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")){
 
                         pst = conn.prepareStatement("UPDATE l1s1bst SET mon = ?,tue = ?,wed = ?,thu = ?,fri = ? where time = ?");
@@ -2227,10 +2294,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l1s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l1s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")){
 
@@ -2243,9 +2312,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l1s1ict_load();
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l1s1ict_load();
+                        }
 
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")){
@@ -2259,9 +2331,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l1s1et_load();
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l1s1et_load();
+                        }
 
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")){
@@ -2275,10 +2350,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l1s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l1s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")){
 
@@ -2291,10 +2368,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l1s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l1s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")){
 
@@ -2307,10 +2386,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l1s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l1s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")){
 
@@ -2323,10 +2404,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l2s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l2s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")){
 
@@ -2339,10 +2422,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l2s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l2s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")){
 
@@ -2355,10 +2440,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l2s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l2s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")){
 
@@ -2371,10 +2458,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l2s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l2s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")){
 
@@ -2387,10 +2476,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l2s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l2s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")){
 
@@ -2403,10 +2494,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l2s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l2s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")){
 
@@ -2419,10 +2512,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l3s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l3s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")){
 
@@ -2435,10 +2530,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l3s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l3s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")){
 
@@ -2451,10 +2548,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l3s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l3s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")){
 
@@ -2467,10 +2566,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l3s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l3s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")){
 
@@ -2483,10 +2584,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l3s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l3s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")){
 
@@ -2499,10 +2602,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l3s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l3s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")){
 
@@ -2515,10 +2620,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l4s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l4s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")){
 
@@ -2531,10 +2638,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l4s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l4s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")){
 
@@ -2547,10 +2656,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l4s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l4s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")){
 
@@ -2563,10 +2674,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l4s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l4s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")){
 
@@ -2579,10 +2692,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l4s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l4s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")){
 
@@ -2595,10 +2710,12 @@ public class Admin extends JFrame {
                         pst.setString(5, fri);
                         pst.setString(6, time);
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Time Table Record Updated");
-                        l4s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Time Table Record Not Updated---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Time Table Record Updated");
+                            l4s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }
                 } catch (SQLException ex) {
@@ -2610,140 +2727,178 @@ public class Admin extends JFrame {
         btn_delete_TT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String time,level,sem,dep;
+                String time,level,sem,dep,mon,tue,wed,thu,fri;
+                mon=txtMon.getText();
+                tue=txtTue.getText();
+                wed= txtWed.getText();
+                thu=txtThu.getText();
+                fri=txtFri.getText();
                 time = txt_tm.getText();
                 level = (String) txtLevel.getSelectedItem();
                 sem = (String) txtSem.getSelectedItem();
                 dep = (String) txtDept.getSelectedItem();
 
                 try {
+                    boolean b = time.isEmpty() || mon.isEmpty() || tue.isEmpty() || wed.isEmpty() || thu.isEmpty() || fri.isEmpty();
                     if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l1s1bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L1 S1 BST Time table");
-                        l1s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L1 S1 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L1 S1 BST Time table");
+                            l1s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l1s1ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L1 S1 ICT Time table");
-                        l1s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L1 S1 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L1 S1 ICT Time table");
+                            l1s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l1s1et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L1 S1 ET Time table");
-                        l1s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L1 S1 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L1 S1 ET Time table");
+                            l1s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l121ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L1 S2 ICT Time table");
-                        l1s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L1 S2 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L1 S2 ICT Time table");
+                            l1s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l1s2bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L1 S2 BST Time table");
-                        l1s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L1 S2 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L1 S2 BST Time table");
+                            l1s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 1") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l1s2et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L1 S2 ET Time table");
-                        l1s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L1 S2 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L1 S2 ET Time table");
+                            l1s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l2s1et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L2 S1 ET Time table");
-                        l2s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L2 S1 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L2 S1 ET Time table");
+                            l2s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l2s1bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L2 S1 BST Time table");
-                        l2s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L2 S1 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L2 S1 BST Time table");
+                            l2s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l2s1ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L2 S1 ICT Time table");
-                        l2s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L2 S1 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L2 S1 ICT Time table");
+                            l2s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l2s2ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L2 S2 ICT Time table");
-                        l2s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L2 S2 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L2 S2 ICT Time table");
+                            l2s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l2s2bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L2 S2 BST Time table");
-                        l2s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L2 S2 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L2 S2 BST Time table");
+                            l2s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 2") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l2s2et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L2 S2 ET Time table");
-                        l2s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L2 S2 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L2 S2 ET Time table");
+                            l2s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l3s1ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L3 S1 ICT Time table");
-                        l3s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L3 S1 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L3 S1 ICT Time table");
+                            l3s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l3s1bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L3 S1 BST Time table");
-                        l3s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L3 S1 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L3 S1 BST Time table");
+                            l3s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l3s1et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L3 S1 ET Time table");
-                        l3s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L3 S1 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L3 S1 ET Time table");
+                            l3s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l3s2ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L3 S2 ICT Time table");
-                        l3s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L3 S2 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L3 S2 ICT Time table");
+                            l3s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l3s2bst WHERE time = ?");
@@ -2756,61 +2911,74 @@ public class Admin extends JFrame {
                     }else if(Objects.equals(level, "Level 3") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l3s2et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L3 S2 ET Time table");
-                        l3s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L3 S2 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L3 S2 ET Time table");
+                            l3s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l4s2ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L4 S2 ICT Time table");
-                        l4s2ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L4 S2 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L4 S2 ICT Time table");
+                            l4s2ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l4s2bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L4 S2 BST Time table");
-                        l4s2bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L4 S2 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L4 S2 BST Time table");
+                            l4s2bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 2") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l4s2et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L4 S2 ET Time table");
-                        l4s2et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L4 S2 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L4 S2 ET Time table");
+                            l4s2et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ICT")) {
                         pst = conn.prepareStatement("DELETE FROM l4s1ict WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L4 S1 ICT Time table");
-                        l4s1ict_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L4 S1 ICT Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L4 S1 ICT Time table");
+                            l4s1ict_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "BST")) {
                         pst = conn.prepareStatement("DELETE FROM l4s1bst WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L4 S1 BST Time table");
-                        l4s1bst_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L4 S1 BST Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L4 S1 BST Time table");
+                            l4s1bst_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }else if(Objects.equals(level, "Level 4") && Objects.equals(sem, "Sem 1") && Objects.equals(dep, "ET")) {
                         pst = conn.prepareStatement("DELETE FROM l4s1et WHERE time = ?");
                         pst.setString(1, time);
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Deleted From L4 S1 ET Time table");
-                        l4s1et_load();
-
+                        if(b){
+                            JOptionPane.showMessageDialog(null, "---Record NOT Deleted From L4 S1 ET Time table---");
+                        }else if(pst.executeUpdate()==1){
+                            JOptionPane.showMessageDialog(null, "Record Deleted From L4 S1 ET Time table");
+                            l4s1et_load();
+                        }
                         Empty_set(txt_tm,txtMon,txtTue,txtWed,txtThu,txtFri);
                     }
-
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -3057,7 +3225,6 @@ public class Admin extends JFrame {
             e.printStackTrace();
         }
     }
-
     //TABLE UPDATE METHODS
     private void table2_load() {    //STUDENT table
         try {
