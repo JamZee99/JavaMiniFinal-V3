@@ -87,12 +87,15 @@ public class Tec_Offc extends JFrame {
     private JButton sbtn;
     private JTextField textAdd;
 
-    public int countPresent=0;
+    public int countPresent = 0;
     public JComboBox gender;
     private JTextField attID;
     public String StdID;
 
     public String Status;
+
+    private int sid;
+
     public Tec_Offc(String title) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -103,6 +106,7 @@ public class Tec_Offc extends JFrame {
         attTable();
         medTable();
         notTable();
+        attSum(sid);
         manageAttBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -227,215 +231,121 @@ public class Tec_Offc extends JFrame {
         });
 
 
-        int countAbsent = 0;
-        double attPercentage = 1;
-        try {
-            pst = conn.prepareStatement("select * from attendance");
-            rs = pst.executeQuery();
-            int index = 100;
-            while (Student.studentCount > 0) {
-                pst = conn.prepareStatement("select * from attendance");
-                rs = pst.executeQuery();
-                countPresent = 0;
-                while (rs.next()) {
-                    //pst.setString(1,txt_search.getText());
-                    String add1 = rs.getString("Status");
-                    String add2 = rs.getNString("Std_id");
-                    if (Objects.equals(add2, String.valueOf(index))) {
-                        if (Objects.equals(add1, "Present")) {
-                            countPresent++;
-
-
-                        }
-
-                    }
-                    ;
-                    double dPresent = countPresent;
-                    countAbsent = 15 - countPresent;
-                    attPercentage = (dPresent / 15) * 100;
-                }
-
-                //rs.beforeFirst();
-                try {
-                    //pst = conn.prepareStatement("INSERT INTO att_summ(att_summ) VALUES (?) WHERE Std_id=?");
-                    pst = conn.prepareStatement("UPDATE att_summ SET Present_days=?, Absent_days=?, Att_percentage=? WHERE Std_id=?");
-                    pst.setString(1, String.valueOf(countPresent));
-                    pst.setString(3, String.valueOf(attPercentage));
-                    pst.setString(2, String.valueOf(countAbsent));
-                    pst.setString(4, String.valueOf(index));
-                    pst.executeUpdate();
-                    //JOptionPane.showMessageDialog(null,index);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-                index++;
-                Student.studentCount--;
-            }
-            JOptionPane.showMessageDialog(null, countPresent);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-
-        }
-        try {
-
-        } catch (Exception e) {
-
-        } finally {
-
-            try {
-
-                rs.close();
-                pst.close();
-
-            } catch (Exception e) {
-
-            }
-        }
-
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                //String sAttID = searchAtt.getText();
-                //String sID = textstdID.getText();
-                //String sDate = textDate.getText();
-                //String sCode = textCode.getText();
-//                Status = Objects.requireNonNull(comboBox1.getSelectedItem()).toString();
-//                if (!(sID.equals(""))) {
-//                    try {
-//                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE std_id=?");
-//                        pst.setString(1, textstdID.getText());
-//                        rs = pst.executeQuery();
-//
-//                        while (rs.next()) {
-//                            String add1 = rs.getString("Std_id");
-//                            textstdID.setText(add1);
-//                            String add2 = rs.getString("Dates");
-//                            textDate.setText(add2);
-//                            String add3 = rs.getString("Level");
-//                            textLevel.setText(add3);
-//                            String add4 = rs.getString("Status");
-//
-//                            if (Objects.equals(add4, "Present")) {
-//                                //comboBox1.setEnabled(true);
-//                                comboBox1.setSelectedIndex(1);
-//                            } else if (Objects.equals(add4, "Absent")) {
-//                                //comboBox1.setEnabled(true);
-//                                comboBox1.setSelectedIndex(2);
-//                            } else {
-//                                // comboBox1.setEnabled(true);
-//                                comboBox1.setSelectedIndex(3);
-//                            }
-//
-//                            String add5 = rs.getString("Course_type");
-//                            textType.setText(add5);
-//                            String add6 = rs.getString("Course_code");
-//                            textCode.setText(add6);
-//
-//                            textStdID.setText(add1);
-//                            searchDate.setText(add2);
-//                            searchCode.setText(add6);
-//                            JOptionPane.showMessageDialog(null, "Founded");
-//                        }
-//
-//                    } catch (Exception e) {
-//                        JOptionPane.showMessageDialog(null, e);
-//                    } finally {
-//
-//                        try {
-//
-//                            rs.close();
-//                            pst.close();
-//
-//                        } catch (Exception e) {
-//
-//                        }
-//                    }
-//                } else if (!(sID.equals("") || sCode.equals("") || sDate.equals(""))) {
-//                    try {
-//                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Std_id=? AND Course_code=? AND dates =?");
-//                        pst.setString(1, textStdID.getText());
-//                        pst.setString(2, searchCode.getText());
-//                        pst.setString(3, searchDate.getText());
-//                        rs = pst.executeQuery();
-//
-//                        while (rs.next()) {
-//                            String add1 = rs.getString("Std_id");
-//                            textstdID.setText(add1);
-//                            String add2 = rs.getString("Dates");
-//                            textDate.setText(add2);
-//                            String add3 = rs.getString("Level");
-//                            textLevel.setText(add3);
-//                            String add4 = rs.getString("Status");
-//
-//                            if (Objects.equals(add4, "Present")) {
-//                                //comboBox1.setEnabled(true);
-//                                comboBox1.setSelectedIndex(1);
-//                            } else if (Objects.equals(add4, "Absent")) {
-//                                //comboBox1.setEnabled(true);
-//                                comboBox1.setSelectedIndex(2);
-//                            } else {
-//                                // comboBox1.setEnabled(true);
-//                                comboBox1.setSelectedIndex(3);
-//                            }
-//
-//
-//                            String add5 = rs.getString("Course_type");
-//                            textType.setText(add5);
-//                            String add6 = rs.getString("Course_code");
-//                            textCode.setText(add6);
-//                            String add7 = rs.getString("Att_id");
-//                            searchAtt.setText(add7);
-//                            JOptionPane.showMessageDialog(null, "Founded");
-//                        }
-//
-//                    } catch (Exception e) {
-//                        JOptionPane.showMessageDialog(null, e);
-//                    } finally {
-//
-//                        try {
-//
-//                            rs.close();
-//                            pst.close();
-//
-//                        } catch (Exception e) {
-//                            JOptionPane.showMessageDialog(null, e);
-//
-//                        }
-//                    }
-//
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Please fill the Attendance ID or All other fields");
-//                }
+                String AttID = attID.getText();
+                String sID = textstdID.getText();
+                String sDate = textDate.getText();
+                String Level = textLevel.getText();
+                String sCode = textCode.getText();
+                Status = Objects.requireNonNull(comboBox1.getSelectedItem()).toString();
+                if (!(AttID.equals(""))) {
+                    try {
+                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Att_id=?");
+                        pst.setString(1, AttID);
+                        rs = pst.executeQuery();
 
-                try{
-                    String sID = textstdID.getText();
-                    //String aID = attID.getText();
-                    pst = conn.prepareStatement("SELECT Att_id,Std_id,dates,Level,Course_Code,Course_type,status FROM attendance where Std_id = ? ");
-                    pst.setString(1,sID);
-                    //pst.setString(2,aID);
+                        while (rs.next()) {
+                            String add1 = rs.getString("Std_id");
+                            textstdID.setText(add1);
+                            String add2 = rs.getString("Dates");
+                            textDate.setText(add2);
+                            String add3 = rs.getString("Level");
+                            textLevel.setText(add3);
+                            String add4 = rs.getString("Status");
 
-                    ResultSet rs = pst.executeQuery();
-                    tableAtt.setModel(DbUtils.resultSetToTableModel(rs));
+                            if (Objects.equals(add4, "Present")) {
+                                //comboBox1.setEnabled(true);
+                                comboBox1.setSelectedIndex(1);
+                            } else if (Objects.equals(add4, "Absent")) {
+                                //comboBox1.setEnabled(true);
+                                comboBox1.setSelectedIndex(2);
+                            } else {
+                                // comboBox1.setEnabled(true);
+                                comboBox1.setSelectedIndex(3);
+                            }
 
-                    attID.setText("");
-                   // textstdID.setText("");
-                    textDate.setText("");
-                    textLevel.setText("");
-                    textCode.setText("");
-                    textType.setText("");
+                            String add5 = rs.getString("Course_type");
+                            textType.setText(add5);
+                            String add6 = rs.getString("Course_code");
+                            textCode.setText(add6);
 
-//                    if(rs.next()){
-//                        String At_id,Std_id,dates,Level,CC,Ct,Stts;
-//                        At_id = rs.getString(1);
-//                        Std_id = rs.getString(2);
-//                        Level = rs.getString(3);
-//                        CC = rs.getString(4);
-//                        Ct = rs.getString(5);
-//                        Stts = rs.getString(6);
+                            //textStdID.setText(add1);
+                            //searchDate.setText(add2);
+                            //searchCode.setText(add6);
+                            JOptionPane.showMessageDialog(null, "Founded");
+                        }
 
-//                    }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    } finally {
+
+                        try {
+
+                            rs.close();
+                            pst.close();
+
+                        } catch (Exception e) {
+
+                        }
+                    }
+                } else if (!(sID.equals("") || sCode.equals("") || sDate.equals(""))) {
+                    try {
+                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Atd_id=? AND Course_code=? AND dates =?");
+                        pst.setString(1, attID.getText());
+                        pst.setString(2, searchCode.getText());
+                        pst.setString(3, searchDate.getText());
+                        rs = pst.executeQuery();
+
+                        while (rs.next()) {
+                            String add1 = rs.getString("Std_id");
+                            textstdID.setText(add1);
+                            String add2 = rs.getString("Dates");
+                            textDate.setText(add2);
+                            String add3 = rs.getString("Level");
+                            textLevel.setText(add3);
+                            String add4 = rs.getString("Status");
+
+                            if (Objects.equals(add4, "Present")) {
+                                //comboBox1.setEnabled(true);
+                                comboBox1.setSelectedIndex(1);
+                            } else if (Objects.equals(add4, "Absent")) {
+                                //comboBox1.setEnabled(true);
+                                comboBox1.setSelectedIndex(2);
+                            } else {
+                                // comboBox1.setEnabled(true);
+                                comboBox1.setSelectedIndex(3);
+                            }
+
+
+                            String add5 = rs.getString("Course_type");
+                            textType.setText(add5);
+                            String add6 = rs.getString("Course_code");
+                            textCode.setText(add6);
+                            String add7 = rs.getString("Att_id");
+                            searchAtt.setText(add7);
+                            JOptionPane.showMessageDialog(null, "Founded");
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    } finally {
+
+                        try {
+
+                            rs.close();
+                            pst.close();
+
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+
+                        }
+                    }
+
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please fill the Attendance ID or All other fields");
                 }
             }
         });
@@ -444,9 +354,15 @@ public class Tec_Offc extends JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
 
+                String sID;
                 try {
 
-                    String aID,sID,adate,alevel,acc,astatus,atype;
+                    String aID;
+                    String adate;
+                    String alevel;
+                    String acc;
+                    String astatus;
+                    String atype;
                     //aID = attID.getText();
                     sID = textstdID.getText();
                     adate = textDate.getText();
@@ -456,24 +372,22 @@ public class Tec_Offc extends JFrame {
                     astatus = (String) comboBox1.getSelectedItem();
 
 
-
                     pst = conn.prepareStatement("INSERT INTO attendance(Std_id,Dates,Level,Course_code,Course_type,Status) VALUES (?,?,?,?,?,?)");
 
                     //pst.setString(1,aID);
-                    pst.setString(1,sID);
-                    pst.setString(2,adate);
-                    pst.setString(3,alevel);
-                    pst.setString(4,acc);
-                    pst.setString(5,atype);
-                    pst.setString(6,astatus);
+                    pst.setString(1, sID);
+                    pst.setString(2, adate);
+                    pst.setString(3, alevel);
+                    pst.setString(4, acc);
+                    pst.setString(5, atype);
+                    pst.setString(6, astatus);
 
-                    if(sID.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"Record NOT Updated");
-                    }else{
+                    if (sID.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Record NOT Updated");
+                    } else {
                         pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null,"Record Updated successful");
+                        JOptionPane.showMessageDialog(null, "Record Updated successful");
                     }
-
 
 
                 } catch (SQLException e) {
@@ -519,7 +433,10 @@ public class Tec_Offc extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Please fill all the fields");
                 }*/
+                sid = Integer.parseInt(sID);
+                attSum(sid);
             }
+
         });
 
         DELETEButton.addActionListener(new ActionListener() {
@@ -527,10 +444,15 @@ public class Tec_Offc extends JFrame {
             public void actionPerformed(ActionEvent evt) {
 
 
-
                 //pst.setString(1,aID);
+                String sID;
                 try {
-                    String aID,sID,adate,alevel,acc,astatus,atype;
+                    String aID;
+                    String adate;
+                    String alevel;
+                    String acc;
+                    String astatus;
+                    String atype;
                     aID = attID.getText();
                     sID = textstdID.getText();
                     adate = textDate.getText();
@@ -541,20 +463,20 @@ public class Tec_Offc extends JFrame {
 
                     pst = conn.prepareStatement("DELETE FROM attendance WHERE Att_id=? AND Std_id=? AND Dates=? AND Level=? AND Course_code=? AND Course_type=? AND Status=? ");
 
-                    pst.setString(1,aID);
-                    pst.setString(2,sID);
-                    pst.setString(3,adate);
-                    pst.setString(4,alevel);
-                    pst.setString(5,acc);
-                    pst.setString(6,atype);
-                    pst.setString(7,astatus);
+                    pst.setString(1, aID);
+                    pst.setString(2, sID);
+                    pst.setString(3, adate);
+                    pst.setString(4, alevel);
+                    pst.setString(5, acc);
+                    pst.setString(6, atype);
+                    pst.setString(7, astatus);
 
-                    if(sID.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"Record NOT Deleted");
-                    }else{
+                    if (sID.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Record NOT Deleted");
+                    } else {
                         pst.executeUpdate();
                         attTable();
-                        JOptionPane.showMessageDialog(null,"Record Deleted successful");
+                        JOptionPane.showMessageDialog(null, "Record Deleted successful");
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -608,6 +530,8 @@ public class Tec_Offc extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Please fill all the fields");
                 }*/
+                sid = Integer.parseInt(sID);
+                attSum(sid);
             }
 
         });
@@ -616,7 +540,7 @@ public class Tec_Offc extends JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    String sID,aDate,aCode,aLevel,aType,aStatus;
+                    String  sID,aDate, aCode, aLevel, aType, aStatus;
 
                     //Att_ID = attID.getText();
                     sID = textstdID.getText();
@@ -628,19 +552,23 @@ public class Tec_Offc extends JFrame {
 
                     pst = conn.prepareStatement("UPDATE attendance SET Dates=?,Level=?,Course_type=?,Status=? Where Std_id=?");
 
-                    pst.setString(1, aDate );
-                    pst.setString(2,aLevel);
-                    pst.setString(3,aType);
-                    pst.setString(4,aStatus);
-                    pst.setString(5,sID);
+                    pst.setString(1, aDate);
+                    pst.setString(2, aLevel);
+                    pst.setString(3, aType);
+                    pst.setString(4, aStatus);
+                    pst.setString(5, sID);
 
 
-                    if(sID.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"Record NOT Updated");
-                    }else{
+                    if (sID.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Record NOT Updated");
+                    } else {
                         pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null,"Record Updated successful");
+                        attTable();
+                        JOptionPane.showMessageDialog(null, "Record Updated successful");
+
                     }
+                    sid = Integer.parseInt(sID);
+                    attSum(sid);
 
 
                 } catch (SQLException e) {
@@ -702,32 +630,31 @@ public class Tec_Offc extends JFrame {
                 String stdID = searchStudent_ID.getText();
 
 
-                if(!(stdID.equals(""))){
-
-                try{
-                    pst = conn.prepareStatement("SELECT * FROM medical WHERE Std_id=?");
-                    pst.setString(1,stdID);
-                    //pst.setString(2,startDate);
-                    ResultSet rs = pst.executeQuery();
-                    tblMedi.setModel(DbUtils.resultSetToTableModel(rs));
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null,e);
-                }
-                finally {
+                if (!(stdID.equals(""))) {
 
                     try {
-
-                        rs.close();
-                        pst.close();
-
+                        pst = conn.prepareStatement("SELECT * FROM medical WHERE Std_id=?");
+                        pst.setString(1, stdID);
+                        //pst.setString(2,startDate);
+                        ResultSet rs = pst.executeQuery();
+                        tblMedi.setModel(DbUtils.resultSetToTableModel(rs));
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
+                    } finally {
 
+                        try {
+
+                            rs.close();
+                            pst.close();
+
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+
+                        }
                     }
-                }
-            }else {
+                } else {
                     medTable();
-                    JOptionPane.showMessageDialog(null,"Fill the Student ID field");
+                    JOptionPane.showMessageDialog(null, "Fill the Student ID field");
                 }
             }
         });
@@ -735,14 +662,13 @@ public class Tec_Offc extends JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 String medID = searchMedi_ID.getText();
-                if(!(medID.equals(""))) {
+                if (!(medID.equals(""))) {
                     try {
                         pst = conn.prepareStatement("SELECT * FROM medical WHERE Med_id=? ");
                         pst.setString(1, medID);
                         rs = pst.executeQuery();
 
-                        while (rs.next())
-                        {
+                        while (rs.next()) {
                             String Get1 = rs.getString("S_date");
                             txtStartDate.setText(Get1);
                             String Get2 = rs.getString("E_date");
@@ -768,8 +694,7 @@ public class Tec_Offc extends JFrame {
                         }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
-                    }
-                    finally {
+                    } finally {
 
                         try {
 
@@ -781,9 +706,8 @@ public class Tec_Offc extends JFrame {
 
                         }
                     }
-                }else
-                {
-                    JOptionPane.showMessageDialog(null,"Fill the Medical ID field");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fill the Medical ID field");
                 }
             }
         });
@@ -798,19 +722,18 @@ public class Tec_Offc extends JFrame {
 
                 try {
                     pst = conn.prepareStatement("INSERT INTO medical(S_date,E_date,Std_id,Course_id,Status) VALUES (?,?,?,?,?)");
-                    pst.setString(1,get1);
-                    pst.setString(2,get2);
-                    pst.setString(3,get3);
-                    pst.setString(4,get4);
-                    pst.setString(5,status);
+                    pst.setString(1, get1);
+                    pst.setString(2, get2);
+                    pst.setString(3, get3);
+                    pst.setString(4, get4);
+                    pst.setString(5, status);
 
                     pst.executeUpdate();
                     medTable();
 
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null,e);
-                }
-                finally {
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                } finally {
 
                     try {
 
@@ -835,62 +758,22 @@ public class Tec_Offc extends JFrame {
                 String status = (String) comboBox2.getSelectedItem();
                 String get5 = searchMedi_ID.getText();
 
-                if(!(get5.equals("")))
-                {
-                try{
-                    pst = conn.prepareStatement("UPDATE medical SET S_date= ?, E_date = ?, Std_id = ?,Course_id =? ,Status =? WHERE Med_id=?");
-                    pst.setString(1,get1);
-                    pst.setString(2,get2);
-                    pst.setString(3,get3);
-                    pst.setString(4,get4);
-                    pst.setString(5,status);
-                    pst.setString(6,get5);
-
-                    pst.execute();
-                    medTable();
-
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null,e);
-                }
-                finally {
-
+                if (!(get5.equals(""))) {
                     try {
+                        pst = conn.prepareStatement("UPDATE medical SET S_date= ?, E_date = ?, Std_id = ?,Course_id =? ,Status =? WHERE Med_id=?");
+                        pst.setString(1, get1);
+                        pst.setString(2, get2);
+                        pst.setString(3, get3);
+                        pst.setString(4, get4);
+                        pst.setString(5, status);
+                        pst.setString(6, get5);
 
-                        rs.close();
-                        pst.close();
+                        pst.execute();
+                        medTable();
 
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
-
-                    }
-                }
-            }else {
-                    JOptionPane.showMessageDialog(null,"Please give medical ID");
-                }
-            }
-        });
-        btnDelete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-
-                String get5 = searchMedi_ID.getText();
-
-                if(!(get5.equals("")))
-                {
-                    try{
-                        pst = conn.prepareStatement("DELETE FROM medical WHERE Med_id=?");
-                        pst.setString(1,get5);
-                        pst.execute();
-                        medTable();
-                        txtStartDate.setText("");
-                        txtEndDate.setText("");
-                        txtStdID.setText("");
-                        txtCourseID.setText("");
-                        comboBox2.setSelectedIndex(0);
-                    }catch (Exception e){
-                        JOptionPane.showMessageDialog(null,e);
-                    }
-                    finally {
+                    } finally {
 
                         try {
 
@@ -902,8 +785,44 @@ public class Tec_Offc extends JFrame {
 
                         }
                     }
-                }else {
-                    JOptionPane.showMessageDialog(null,"Please give medical ID before delete");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please give medical ID");
+                }
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+
+                String get5 = searchMedi_ID.getText();
+
+                if (!(get5.equals(""))) {
+                    try {
+                        pst = conn.prepareStatement("DELETE FROM medical WHERE Med_id=?");
+                        pst.setString(1, get5);
+                        pst.execute();
+                        medTable();
+                        txtStartDate.setText("");
+                        txtEndDate.setText("");
+                        txtStdID.setText("");
+                        txtCourseID.setText("");
+                        comboBox2.setSelectedIndex(0);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    } finally {
+
+                        try {
+
+                            rs.close();
+                            pst.close();
+
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please give medical ID before delete");
                 }
             }
         });
@@ -917,9 +836,8 @@ public class Tec_Offc extends JFrame {
         searchButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                String notID =textNotID.getText();
-                if(notID.equals(""))
-                {
+                String notID = textNotID.getText();
+                if (notID.equals("")) {
                     try {
                         pst = conn.prepareStatement("SELECT * FROM notice");
                         ResultSet rs = pst.executeQuery();
@@ -927,128 +845,126 @@ public class Tec_Offc extends JFrame {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-                else {
-                try{
-                    pst = conn.prepareStatement("SELECT * FROM notice WHERE notice_no=?");
-                    pst.setString(1,notID);
-                    ResultSet rs = pst.executeQuery();
-                    tblNotice.setModel(DbUtils.resultSetToTableModel(rs));
+                } else {
+                    try {
+                        pst = conn.prepareStatement("SELECT * FROM notice WHERE notice_no=?");
+                        pst.setString(1, notID);
+                        ResultSet rs = pst.executeQuery();
+                        tblNotice.setModel(DbUtils.resultSetToTableModel(rs));
 
-                }catch (Exception e)
-                {
-                    JOptionPane.showMessageDialog(null,e);
-                }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
 
-            }
+                }
             }
 
         });
         scr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String level,deprt, semester;
+                String level, deprt, semester;
 
                 level = (String) lvl.getSelectedItem();
                 deprt = (String) dep.getSelectedItem();
                 semester = (String) sem.getSelectedItem();
 
-                try{
-                    if(level=="Level 1" && deprt == "ICT" && semester=="1" ){
-                        pst=conn.prepareStatement("SELECT * FROM l1s1ict");
-                        ResultSet rs=pst.executeQuery();
+                try {
+                    if (level == "Level 1" && deprt == "ICT" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l1s1ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 1" && deprt == "ET" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l1s1et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 1" && deprt == "ET" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l1s1et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 1" && deprt == "BST" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l1s1bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 1" && deprt == "BST" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l1s1bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 1" && deprt == "ICT" && semester=="2" ){
-                        pst=conn.prepareStatement("SELECT * FROM l1s2ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 1" && deprt == "ICT" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l1s2ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 1" && deprt == "ET" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l1s2et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 1" && deprt == "ET" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l1s2et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 1" && deprt == "BST" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l1s2bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 1" && deprt == "BST" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l1s2bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 2" && deprt == "ICT" && semester=="1" ){
-                        pst=conn.prepareStatement("SELECT * FROM l2s1ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 2" && deprt == "ICT" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l2s1ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 2" && deprt == "ET" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l2s1et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 2" && deprt == "ET" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l2s1et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 2" && deprt == "BST" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l2s1bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 2" && deprt == "BST" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l2s1bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 2" && deprt == "ICT" && semester=="2" ){
-                        pst=conn.prepareStatement("SELECT * FROM l2s2ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 2" && deprt == "ICT" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l2s2ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 2" && deprt == "ET" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l2s2et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 2" && deprt == "ET" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l2s2et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 2" && deprt == "BST" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l2s2bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 2" && deprt == "BST" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l2s2bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 3" && deprt == "ICT" && semester=="1" ){
-                        pst=conn.prepareStatement("SELECT * FROM l3s1ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 3" && deprt == "ICT" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l3s1ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 3" && deprt == "ET" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l3s1et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 3" && deprt == "ET" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l3s1et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 3" && deprt == "BST" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l3s1bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 3" && deprt == "BST" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l3s1bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 3" && deprt == "ICT" && semester=="2" ){
-                        pst=conn.prepareStatement("SELECT * FROM l3s2ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 3" && deprt == "ICT" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l3s2ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 3" && deprt == "ET" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l3s2et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 3" && deprt == "ET" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l3s2et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 3" && deprt == "BST" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l3s2bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 3" && deprt == "BST" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l3s2bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 4" && deprt == "ICT" && semester=="1" ){
-                        pst=conn.prepareStatement("SELECT * FROM l4s1ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 4" && deprt == "ICT" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l4s1ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 4" && deprt == "ET" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l4s1et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 4" && deprt == "ET" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l4s1et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 4" && deprt == "BST" && semester=="1") {
-                        pst=conn.prepareStatement("SELECT * FROM l4s1bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 4" && deprt == "BST" && semester == "1") {
+                        pst = conn.prepareStatement("SELECT * FROM l4s1bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if(level=="Level 4" && deprt == "ICT" && semester=="2" ){
-                        pst=conn.prepareStatement("SELECT * FROM l4s2ict");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 4" && deprt == "ICT" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l4s2ict");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 4" && deprt == "ET" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l4s2et");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 4" && deprt == "ET" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l4s2et");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
-                    } else if (level=="Level 4" && deprt == "BST" && semester=="2") {
-                        pst=conn.prepareStatement("SELECT * FROM l4s2bst");
-                        ResultSet rs=pst.executeQuery();
+                    } else if (level == "Level 4" && deprt == "BST" && semester == "2") {
+                        pst = conn.prepareStatement("SELECT * FROM l4s2bst");
+                        ResultSet rs = pst.executeQuery();
                         table1.setModel(DbUtils.resultSetToTableModel(rs));
                     }
                 } catch (Exception ex) {
@@ -1062,12 +978,12 @@ public class Tec_Offc extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String id=tecid.getText();
+                    String id = tecid.getText();
                     pst = conn.prepareStatement("SELECT Tec_id,Fname,Lname,Sex,Address,Pno,Email,DOB FROM tecofficer WHERE Tec_id=? ");
                     pst.setString(1, id);
                     ResultSet rs = pst.executeQuery();
 
-                    if(rs.next()){
+                    if (rs.next()) {
                         String fn = rs.getString(2);
                         String ln = rs.getString(3);
                         String sex = rs.getString(4);
@@ -1085,14 +1001,14 @@ public class Tec_Offc extends JFrame {
                         gender.setSelectedItem(sex);
 
 
-                    }else{
+                    } else {
                         textFname.setText("");
                         textLname.setText("");
                         textDOB.setText("");
                         textPno.setText("");
                         textEmail.setText("");
                         textAdd.setText("");
-                        JOptionPane.showMessageDialog(null,"Invalid Admin ID");
+                        JOptionPane.showMessageDialog(null, "Invalid Admin ID");
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -1102,13 +1018,13 @@ public class Tec_Offc extends JFrame {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                    String fna,lna,add,gen,tid,dob,pno,mail;
+                try {
+                    String fna, lna, add, gen, tid, dob, pno, mail;
 
                     fna = textFname.getText();
                     lna = textLname.getText();
                     add = textAdd.getText();
-                    gen = (String)gender.getSelectedItem();
+                    gen = (String) gender.getSelectedItem();
                     dob = textDOB.getText();
                     pno = textPno.getText();
                     mail = textEmail.getText();
@@ -1117,22 +1033,21 @@ public class Tec_Offc extends JFrame {
 
                     pst = conn.prepareStatement("UPDATE tecofficer SET Fname=?,Lname=?,Sex=?,Address=?,Pno=?,Email=?,DOB=? WHERE Tec_id=?");
 
-                    pst.setString(1,fna);
-                    pst.setString(2,lna);
-                    pst.setString(3,gen);
-                    pst.setString(4,add);
-                    pst.setString(5,pno);
-                    pst.setString(6,mail);
-                    pst.setString(7,dob);
-                    pst.setString(8,tid);
+                    pst.setString(1, fna);
+                    pst.setString(2, lna);
+                    pst.setString(3, gen);
+                    pst.setString(4, add);
+                    pst.setString(5, pno);
+                    pst.setString(6, mail);
+                    pst.setString(7, dob);
+                    pst.setString(8, tid);
 
-                    if(tid.isEmpty()){
-                        JOptionPane.showMessageDialog(null,"Record NOT Updated");
-                    }else{
+                    if (tid.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Record NOT Updated");
+                    } else {
                         pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null,"Record Updated successful");
+                        JOptionPane.showMessageDialog(null, "Record Updated successful");
                     }
-
 
 
                     textFname.setText("");
@@ -1150,7 +1065,8 @@ public class Tec_Offc extends JFrame {
             }
         });
     }
-    void attTable(){
+
+    void attTable() {
         try {
             pst = conn.prepareStatement("SELECT * FROM attendance");
             ResultSet rs = pst.executeQuery();
@@ -1159,7 +1075,86 @@ public class Tec_Offc extends JFrame {
             e.printStackTrace();
         }
     }
-    void medTable(){
+
+    void attTable2(int Std_id) {
+        try {
+            pst = conn.prepareStatement("SELECT * FROM attendance WHERE Std_id =? ");
+            pst.setInt(1, Std_id);
+            ResultSet rs = pst.executeQuery();
+            tableAtt.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void attSum(int index) {
+        int countAbsent = 0;
+        double attPercentage = 1;
+        try {
+            pst = conn.prepareStatement("select * from attendance");
+            rs = pst.executeQuery();
+            while (Student.studentCount > 0) {
+                pst = conn.prepareStatement("select * from attendance");
+                rs = pst.executeQuery();
+                countPresent = 0;
+                while (rs.next()) {
+                    //pst.setString(1,txt_search.getText());
+                    String add1 = rs.getString("Status");
+                    String add2 = rs.getNString("Std_id");
+                    if (Objects.equals(add2, String.valueOf(index))) {
+                        if (Objects.equals(add1, "Present")) {
+                            countPresent++;
+
+
+                        }
+
+                    }
+                    ;
+                    double dPresent = countPresent;
+                    countAbsent = 15 - countPresent;
+                    attPercentage = (dPresent / 15) * 100;
+                }
+
+                //rs.beforeFirst();
+                try {
+                    //pst = conn.prepareStatement("INSERT INTO att_summ(att_summ) VALUES (?) WHERE Std_id=?");
+                    pst = conn.prepareStatement("UPDATE att_summ SET Present_days=?, Absent_days=?, Att_percentage=? WHERE Std_id=?");
+                    pst.setString(1, String.valueOf(countPresent));
+                    pst.setString(3, String.valueOf(attPercentage));
+                    pst.setString(2, String.valueOf(countAbsent));
+                    pst.setString(4, String.valueOf(index));
+                    pst.executeUpdate();
+                    //JOptionPane.showMessageDialog(null,index);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                index++;
+                Student.studentCount--;
+            }
+            //JOptionPane.showMessageDialog(null, countPresent);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+        try {
+
+        } catch (Exception e) {
+
+        } finally {
+
+            try {
+
+                rs.close();
+                pst.close();
+
+            } catch (Exception e) {
+
+            }
+
+        }
+    }
+
+    void medTable() {
         try {
             pst = conn.prepareStatement("SELECT * FROM medical");
             ResultSet rs = pst.executeQuery();
@@ -1168,7 +1163,8 @@ public class Tec_Offc extends JFrame {
             e.printStackTrace();
         }
     }
-    void notTable(){
+
+    void notTable() {
         try {
             pst = conn.prepareStatement("SELECT * FROM notice");
             ResultSet rs = pst.executeQuery();
@@ -1179,8 +1175,8 @@ public class Tec_Offc extends JFrame {
     }
 
     public static void main(String[] args) {
-        Tec_Offc tecOff=new Tec_Offc("Tec_off");
+        Tec_Offc tecOff = new Tec_Offc("Tec_off");
     }
 
-
 }
+
