@@ -90,13 +90,20 @@ public class Tec_Offc extends JFrame {
     public int countPresent = 0;
     public JComboBox gender;
     private JTextField attID;
+    private JButton CLEARButton;
+    private JTextField txtSeeachAttID;
+    private JTextField txtSearchStdID;
     public String StdID;
 
+    public String fname,lname;
+
     public String Status;
+    public int check;
 
     private int sid;
 
-    public Tec_Offc(String title) {
+
+    public Tec_Offc(String title,String tecID) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(tecMainPane);
@@ -107,6 +114,25 @@ public class Tec_Offc extends JFrame {
         medTable();
         notTable();
         attSum(sid);
+
+        try {
+            pst = conn.prepareStatement("SELECT Fname,Lname FROM tecofficer where Tec_id =?");
+            pst.setString(1,tecID);
+            ResultSet rs = pst.executeQuery();
+            String fnameT = null;
+            String lnameT = null;
+            while (rs.next())
+            {
+                fnameT=rs.getString("Fname");
+                lnameT=rs.getString("Lname");
+            }
+
+            uNametxt.setText(fnameT+" "+lnameT);
+
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
         manageAttBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -234,18 +260,17 @@ public class Tec_Offc extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                String AttID = attID.getText();
-                String sID = textstdID.getText();
+                String AttID = txtSeeachAttID.getText();
+                String sID = txtSearchStdID.getText();
                 String sDate = textDate.getText();
                 String Level = textLevel.getText();
                 String sCode = textCode.getText();
                 Status = Objects.requireNonNull(comboBox1.getSelectedItem()).toString();
-                if (!(AttID.equals(""))) {
+                if (!(AttID.equals("")) && sID.equals("")) {
                     try {
                         pst = conn.prepareStatement("SELECT * FROM attendance WHERE Att_id=?");
                         pst.setString(1, AttID);
                         rs = pst.executeQuery();
-
                         while (rs.next()) {
                             String add1 = rs.getString("Std_id");
                             textstdID.setText(add1);
@@ -290,62 +315,28 @@ public class Tec_Offc extends JFrame {
 
                         }
                     }
-                } else if (!(sID.equals("") || sCode.equals("") || sDate.equals(""))) {
                     try {
-                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Atd_id=? AND Course_code=? AND dates =?");
-                        pst.setString(1, attID.getText());
-                        pst.setString(2, searchCode.getText());
-                        pst.setString(3, searchDate.getText());
-                        rs = pst.executeQuery();
-
-                        while (rs.next()) {
-                            String add1 = rs.getString("Std_id");
-                            textstdID.setText(add1);
-                            String add2 = rs.getString("Dates");
-                            textDate.setText(add2);
-                            String add3 = rs.getString("Level");
-                            textLevel.setText(add3);
-                            String add4 = rs.getString("Status");
-
-                            if (Objects.equals(add4, "Present")) {
-                                //comboBox1.setEnabled(true);
-                                comboBox1.setSelectedIndex(1);
-                            } else if (Objects.equals(add4, "Absent")) {
-                                //comboBox1.setEnabled(true);
-                                comboBox1.setSelectedIndex(2);
-                            } else {
-                                // comboBox1.setEnabled(true);
-                                comboBox1.setSelectedIndex(3);
-                            }
-
-
-                            String add5 = rs.getString("Course_type");
-                            textType.setText(add5);
-                            String add6 = rs.getString("Course_code");
-                            textCode.setText(add6);
-                            String add7 = rs.getString("Att_id");
-                            searchAtt.setText(add7);
-                            JOptionPane.showMessageDialog(null, "Founded");
-                        }
-
+                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Att_id=?");
+                        pst.setString(1,AttID);
+                        ResultSet rs = pst.executeQuery();
+                        tableAtt.setModel(DbUtils.resultSetToTableModel(rs));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    } finally {
-
-                        try {
-
-                            rs.close();
-                            pst.close();
-
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, e);
-
-                        }
+                        e.printStackTrace();
                     }
 
+                }else if (!(sID.equals("")) &&AttID.equals("") ) {
+
+                    try {
+                        pst = conn.prepareStatement("SELECT * FROM attendance WHERE Std_id=?");
+                        pst.setString(1,sID);
+                        ResultSet rs = pst.executeQuery();
+                        tableAtt.setModel(DbUtils.resultSetToTableModel(rs));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Please fill the Attendance ID or All other fields");
+                    JOptionPane.showMessageDialog(null, "Fill attendance id field only for edit or Student id field only for view");
                 }
             }
         });
@@ -355,45 +346,80 @@ public class Tec_Offc extends JFrame {
             public void actionPerformed(ActionEvent evt) {
 
                 String sID;
+
+                //String aID;
+                String adate;
+                String alevel;
+                String acc;
+                String astatus;
+                String atype;
+                //aID = attID.getText();
+                sID = textstdID.getText();
+                adate = textDate.getText();
+                alevel = textLevel.getText();
+                acc = textCode.getText();
+                atype = textType.getText();
+                astatus = (String) comboBox1.getSelectedItem();
+
                 try {
-
-                    String aID;
-                    String adate;
-                    String alevel;
-                    String acc;
-                    String astatus;
-                    String atype;
-                    //aID = attID.getText();
-                    sID = textstdID.getText();
-                    adate = textDate.getText();
-                    alevel = textLevel.getText();
-                    acc = textCode.getText();
-                    atype = textType.getText();
-                    astatus = (String) comboBox1.getSelectedItem();
-
-
-                    pst = conn.prepareStatement("INSERT INTO attendance(Std_id,Dates,Level,Course_code,Course_type,Status) VALUES (?,?,?,?,?,?)");
-
-                    //pst.setString(1,aID);
+                    pst = conn.prepareStatement("SELECT Std_id,Dates,Course_code FROM attendance WHERE Std_id=? ");
                     pst.setString(1, sID);
-                    pst.setString(2, adate);
-                    pst.setString(3, alevel);
-                    pst.setString(4, acc);
-                    pst.setString(5, atype);
-                    pst.setString(6, astatus);
+                    rs = pst.executeQuery();
 
-                    if (sID.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Record NOT Updated");
-                    } else {
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Record Updated successful");
+                    while (rs.next()) {
+                        String Get1 = rs.getString("Dates");
+                        String Get3 = rs.getString("Std_id");
+                        String Get4 = rs.getString("Course_code");
+
+                        boolean b = Objects.equals(Get1, adate) && Objects.equals(Get3, sID) && Objects.equals(Get4, acc);
+                        if(b)
+                        {
+                            check = 1;
+                        }
+                        if(!(b)) {
+                            check = 0;
+                        }
+
+                    }
+                    if(check==0)
+                    {
+                        pst = conn.prepareStatement("INSERT INTO attendance(Std_id,Dates,Level,Course_code,Course_type,Status) VALUES (?,?,?,?,?,?)");
+
+                        //pst.setString(1,aID);
+                        pst.setString(1, sID);
+                        pst.setString(2, adate);
+                        pst.setString(3, alevel);
+                        pst.setString(4, acc);
+                        pst.setString(5, atype);
+                        pst.setString(6, astatus);
+                        if (sID.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Record NOT Updated");
+                        } else {
+                            pst.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Record Updated successful");
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Duplicate data");
                     }
 
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                } finally {
 
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    try {
+
+                        rs.close();
+                        pst.close();
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+
+                    }
                 }
 
+
+                attTable();
 
 
 
@@ -453,7 +479,7 @@ public class Tec_Offc extends JFrame {
                     String acc;
                     String astatus;
                     String atype;
-                    aID = attID.getText();
+                    aID = txtSeeachAttID.getText();
                     sID = textstdID.getText();
                     adate = textDate.getText();
                     alevel = textLevel.getText();
@@ -481,7 +507,7 @@ public class Tec_Offc extends JFrame {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
+                attTable();
 
 
 
@@ -550,13 +576,14 @@ public class Tec_Offc extends JFrame {
                     aType = textType.getText();
                     aStatus = (String) comboBox1.getSelectedItem();
 
-                    pst = conn.prepareStatement("UPDATE attendance SET Dates=?,Level=?,Course_type=?,Status=? Where Std_id=?");
+                    pst = conn.prepareStatement("UPDATE attendance SET Dates=?,Level=?,Course_type=?,Status=?,Course_code=? Where Std_id=?");
 
                     pst.setString(1, aDate);
                     pst.setString(2, aLevel);
                     pst.setString(3, aType);
                     pst.setString(4, aStatus);
-                    pst.setString(5, sID);
+                    pst.setString(6, sID);
+                    pst.setString(5,aCode);
 
 
                     if (sID.isEmpty()) {
@@ -569,7 +596,7 @@ public class Tec_Offc extends JFrame {
                     }
                     sid = Integer.parseInt(sID);
                     attSum(sid);
-
+                    attTable();
 
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -1064,6 +1091,18 @@ public class Tec_Offc extends JFrame {
                 }
             }
         });
+
+        CLEARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textstdID.setText("");
+                textDate.setText("");
+                textLevel.setText("");
+                comboBox1.setSelectedIndex(0);
+                textType.setText("");
+                textCode.setText("");
+            }
+        });
     }
 
     void attTable() {
@@ -1172,10 +1211,6 @@ public class Tec_Offc extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        Tec_Offc tecOff = new Tec_Offc("Tec_off");
     }
 
 }
