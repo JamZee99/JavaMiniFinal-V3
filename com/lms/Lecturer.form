@@ -179,7 +179,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="a8f89" binding="profileEdit" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="a8f89" binding="profileEdit" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="16" left="16" bottom="16" right="16"/>
             <constraints>
               <card name="Card2"/>
@@ -444,96 +444,6 @@
                   </grid>
                 </children>
               </tabbedpane>
-              <grid id="313a7" binding="mangeAtt" layout-manager="GridLayoutManager" row-count="16" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="16" left="16" bottom="16" right="16"/>
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-1"/>
-                  <enabled value="true"/>
-                </properties>
-                <border type="none"/>
-                <children>
-                  <grid id="5fa83" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="0" bottom="0" right="0"/>
-                    <constraints>
-                      <grid row="4" column="1" row-span="11" col-span="6" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false">
-                        <minimum-size width="720" height="500"/>
-                        <preferred-size width="720" height="500"/>
-                        <maximum-size width="720" height="500"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <background color="-2697514"/>
-                      <enabled value="false"/>
-                    </properties>
-                    <border type="none"/>
-                    <children>
-                      <scrollpane id="d5436" binding="atteTabl">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <background color="-2697514"/>
-                        </properties>
-                        <border type="none"/>
-                        <children>
-                          <component id="95a4a" class="javax.swing.JTable" binding="tableAtt">
-                            <constraints/>
-                            <properties>
-                              <background color="-2697514"/>
-                            </properties>
-                          </component>
-                        </children>
-                      </scrollpane>
-                    </children>
-                  </grid>
-                  <component id="94d15" class="javax.swing.JTextField" binding="textStdID">
-                    <constraints>
-                      <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <minimum-size width="200" height="25"/>
-                        <preferred-size width="200" height="25"/>
-                        <maximum-size width="200" height="25"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <font size="18"/>
-                    </properties>
-                  </component>
-                  <component id="8fc9b" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="16"/>
-                      <text value="Student ID"/>
-                    </properties>
-                  </component>
-                  <hspacer id="f380a">
-                    <constraints>
-                      <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <component id="43f38" class="javax.swing.JButton" binding="searchButton" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="5" row-span="4" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                        <minimum-size width="120" height="35"/>
-                        <preferred-size width="120" height="35"/>
-                        <maximum-size width="120" height="35"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Search"/>
-                    </properties>
-                  </component>
-                  <vspacer id="729ee">
-                    <constraints>
-                      <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
-                </children>
-              </grid>
             </children>
           </grid>
           <grid id="32a4d" binding="medDtls" layout-manager="GridLayoutManager" row-count="9" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -2131,6 +2041,96 @@
               </tabbedpane>
             </children>
           </grid>
+          <grid id="313a7" binding="mangeAtt" layout-manager="GridLayoutManager" row-count="16" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="16" left="16" bottom="16" right="16"/>
+            <constraints>
+              <card name="Card1"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <enabled value="true"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="5fa83" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="4" column="1" row-span="11" col-span="6" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false">
+                    <minimum-size width="720" height="500"/>
+                    <preferred-size width="720" height="500"/>
+                    <maximum-size width="720" height="500"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2697514"/>
+                  <enabled value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="d5436" binding="atteTabl">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-2697514"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="95a4a" class="javax.swing.JTable" binding="tableAtt">
+                        <constraints/>
+                        <properties>
+                          <background color="-2697514"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <component id="94d15" class="javax.swing.JTextField" binding="textStdID">
+                <constraints>
+                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="200" height="25"/>
+                    <preferred-size width="200" height="25"/>
+                    <maximum-size width="200" height="25"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font size="18"/>
+                </properties>
+              </component>
+              <component id="8fc9b" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                  <text value="Student ID"/>
+                </properties>
+              </component>
+              <hspacer id="f380a">
+                <constraints>
+                  <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="43f38" class="javax.swing.JButton" binding="searchButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="5" row-span="4" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <minimum-size width="120" height="35"/>
+                    <preferred-size width="120" height="35"/>
+                    <maximum-size width="120" height="35"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="Search"/>
+                </properties>
+              </component>
+              <vspacer id="729ee">
+                <constraints>
+                  <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
         </children>
       </grid>
       <grid id="5a9c6" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -2196,12 +2196,6 @@
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="a3212" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
       <vspacer id="fb8e9">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>

@@ -147,7 +147,7 @@ public class Admin extends JFrame {
     public String gender;
     public String StdID;
     public String Status;
-    public Admin(String title) {
+    public Admin(String title,String AdminID) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(tecMainPane);
@@ -155,6 +155,24 @@ public class Admin extends JFrame {
         setVisible(true);
         conn = LMSdb_siyam.java_db();
         Notice();
+        try {
+            pst = conn.prepareStatement("SELECT Fname,Lname FROM admin where Ad_id =?");
+            pst.setString(1,AdminID);
+            ResultSet rs = pst.executeQuery();
+            String fnameT = null;
+            String lnameT = null;
+            while (rs.next())
+            {
+                fnameT=rs.getString("Fname");
+                lnameT=rs.getString("Lname");
+            }
+
+            uNametxt.setText(fnameT+" "+lnameT);
+
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
 
         Btn_Maintain_user.addActionListener(new ActionListener() {
             @Override
@@ -3287,9 +3305,5 @@ public class Admin extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    public static void main(String[] args) {
-        Admin an =new Admin("siyam");
-        LMSdb_siyam db = new LMSdb_siyam();
     }
 }

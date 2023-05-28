@@ -144,6 +144,7 @@ public class Lecturer extends JFrame {
     private JButton showEligibilityButton;
     private JTextField eligiID;
     private JButton EligiSearch;
+    private JScrollPane atteTabl;
 
     public int countPresent = 0;
     public String gender;
@@ -192,7 +193,7 @@ public class Lecturer extends JFrame {
         lactureShowDetailsShows();
         tableStudent();
         tableNotice();
-       //tableAtten();
+       tableAtten();
         tableMedi();
         tableMarks();
         caTableMarks();
@@ -1228,6 +1229,7 @@ public class Lecturer extends JFrame {
                 emBox.setText(email);
                 Date_of_Birth.setText(dob);
                 textLecPho.setText(pNo);
+                lacture_details();
                 lacture_details();
 
 
