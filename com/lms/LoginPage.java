@@ -39,6 +39,8 @@ public class LoginPage extends JFrame{
     public String  pwd;
     public static int winChecked = -1;
 
+    public String fnameTec,lnameTec;
+
     public LoginPage (String title){
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -54,14 +56,13 @@ public class LoginPage extends JFrame{
                 frame__windowStateChanged(arg0);
             }
         });
-
         //initComponents();
         conn = LMSdb.java_db();
-        LOGINButton.addActionListener(new ActionListener() {
+
+            LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 userID = txtUserID.getText();
-
                 pwd = txtPwd.getText();
                 String sql = "SELECT * FROM admin WHERE Ad_id="+userID;
 
@@ -138,7 +139,7 @@ public class LoginPage extends JFrame{
                         }
                     }
                 }
-                if (access == "Technical Officer") {
+                if (Objects.equals(access, "Technical Officer")) {
                     String userIDt = txtUserID.getText();
                     //String sqlTecOfficer = "SELECT Tec_id,Password FROM tecofficer where Tec_id ="+userID;
 
@@ -156,7 +157,7 @@ public class LoginPage extends JFrame{
                         }
                         if ((Objects.equals(userIDt, tO.getLecId())) && Objects.equals(pwd, tO.getPassword())){
                             JOptionPane.showMessageDialog(null, "Welcome "+access);
-                            Tec_Offc tec_Offc = new Tec_Offc("Tec log");
+                            Tec_Offc tec_Offc = new Tec_Offc("Tec log",userIDt);
                             tec_Offc.setVisible(true);
                             dispose();
                         } else {
@@ -194,9 +195,10 @@ public class LoginPage extends JFrame{
                         if (Objects.equals(userID, lc.getLecId()) && Objects.equals(pwd, lc.getPassword()))
                         {
                             JOptionPane.showMessageDialog(null, "Welcome "+access);
-                            Lecturer lecture = new Lecturer("PanelLecturer");
-                            lecture.setVisible(true);
+                            Lecturer lecture = new Lecturer("PanelLecturer",userID);
                             dispose();
+                            lecture.setVisible(true);
+
                         } else {
                             JOptionPane.showMessageDialog(null, "Dear Lecturer, UserId and Password you entered wrong " );
                         }

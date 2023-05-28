@@ -76,7 +76,6 @@ public class Lecturer extends JFrame {
     private JTextField textAddMat;
     private JButton browserButton;
     private JButton addButton;
-    private JComboBox comboBox3;
     private JTabbedPane tabbedPane2;
     private JComboBox subCod;
     private JTextField stuId;
@@ -127,7 +126,6 @@ public class Lecturer extends JFrame {
     private JTextField dobTxt;
     private JTextField depTxt;
     private JButton finalClear;
-    private JScrollPane atteTabl;
     private JTable marTable;
     private JTable caMark;
     private JTextField shoMarId;
@@ -153,13 +151,36 @@ public class Lecturer extends JFrame {
 
     public String Status;
 
-    public Lecturer(String title) {
+    public String Lecid;
+
+    public Lecturer(String title,String lecid) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(tecMainPane);
         this.pack();
         setVisible(true);
         conn = LMSdb.java_db();
+        Lecid = lecid;
+        //table_load();
+
+        try {
+            pst = conn.prepareStatement("SELECT Fname,Lname FROM lecturer where Lec_id =?");
+            pst.setString(1,Lecid);
+            ResultSet rs = pst.executeQuery();
+            String fnameT = null;
+            String lnameT = null;
+            while (rs.next())
+            {
+                fnameT=rs.getString("Fname");
+                lnameT=rs.getString("Lname");
+            }
+
+            uNametxt.setText(fnameT+" "+lnameT);
+
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
         assessmentCalculate();
         caStatus();
         quizCalculate();
@@ -171,13 +192,10 @@ public class Lecturer extends JFrame {
         lactureShowDetailsShows();
         tableStudent();
         tableNotice();
-        tableAtten();
+       //tableAtten();
         tableMedi();
         tableMarks();
         caTableMarks();
-
-        //table_load();
-
         btn_Student_details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1152,12 +1170,14 @@ public class Lecturer extends JFrame {
 
             }
         });
+
     }
 
     // Lecture Details Shows...
     public void lacture_details() {
         try {
-            pst = conn.prepareStatement("SELECT Lec_id,Fname,Lname,DOB,Email,Pno FROM lecturer WHERE Lec_id = 1");
+            pst = conn.prepareStatement("SELECT Lec_id,Fname,Lname,DOB,Email,Pno FROM lecturer WHERE Lec_id =?");
+            pst.setString(1,Lecid);
             ResultSet lectDetails = pst.executeQuery();
 
             if (lectDetails.next() == true) {
@@ -1192,8 +1212,8 @@ public class Lecturer extends JFrame {
         // String userName = String.valueOf(2);
 
         try {
-            pst = conn.prepareStatement("SELECT Fname,Lname,Email,DOB,Pno FROM lecturer WHERE Lec_id = 1");
-            // pst.setString(1, userName);
+            pst = conn.prepareStatement("SELECT Fname,Lname,Email,DOB,Pno FROM lecturer WHERE Lec_id = ?");
+            pst.setString(1, Lecid);
             ResultSet leDetails = pst.executeQuery();
 
             if (leDetails.next() == true) {
@@ -1235,12 +1255,6 @@ public class Lecturer extends JFrame {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        Lecturer lNew = new Lecturer("lNew");
-
-
     }
 
     //Student Details...
