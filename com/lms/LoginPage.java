@@ -85,7 +85,7 @@ public class LoginPage extends JFrame{
                         //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
                         if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
                             JOptionPane.showMessageDialog(null, "Welcome "+access);
-                            Admin admin = new Admin("admin form");
+                            Admin admin = new Admin("admin form",userID);
                             admin.setVisible(true);
                             dispose();
                         } else {
@@ -256,7 +256,7 @@ public class LoginPage extends JFrame{
                             //String sql = "SELECT Ad_id,Password FROM admin where (Ad_id = ? and Password=?)"
                             if (Objects.equals( userID, AdminM.Ad_id) && Objects.equals(pwd, AdminM.Password)) {
                                 JOptionPane.showMessageDialog(null, "Welcome "+access);
-                                Admin ad = new Admin("LoginForm");
+                                Admin ad = new Admin("LoginForm",userID);
                                 ad.setVisible(true);
                                 dispose();
                             } else {
